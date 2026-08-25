@@ -1,4 +1,4 @@
-package com.example.daily_armourup
+package com.hustlebluprint.armourupdaily
 
 import io.flutter.embedding.android.FlutterActivity
 

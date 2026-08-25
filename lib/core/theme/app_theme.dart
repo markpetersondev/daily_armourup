@@ -119,7 +119,7 @@ abstract final class AppTheme {
         centerTitle: false,
         titleTextStyle: textTheme.headlineSmall,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusCard)),
