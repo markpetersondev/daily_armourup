@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Not required by the app today (everything is local-first), but
+         planned Firebase integration will need outbound network access. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Armour Up Daily"
         android:name="${applicationName}"

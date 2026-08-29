@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'core/constants/app_strings.dart';
 import 'core/router/app_router.dart';
@@ -9,6 +10,11 @@ import 'shared/providers/app_providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Fonts are bundled in assets/fonts/google_fonts/ so the app stays fully
+  // offline — never fall back to fetching them over the network.
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   final storage = await LocalStorageService.init();
   runApp(
     ProviderScope(
