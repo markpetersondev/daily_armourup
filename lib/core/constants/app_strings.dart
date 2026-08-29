@@ -9,6 +9,8 @@ abstract final class AppStrings {
       'and return to prayer when life feels heavy.';
   static const privacyNote =
       'Your journey is private and saved securely on this device.';
+  static const privacyPolicyUrl =
+      'https://markpetersondev.github.io/armour-up-privacy/';
 
   static const graceLines = [
     'One faithful step at a time.',

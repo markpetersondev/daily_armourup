@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
@@ -250,6 +251,16 @@ class ProfileScreen extends ConsumerWidget {
                         leading: const Icon(Icons.info_outline),
                         title: const Text(AppStrings.appName),
                         subtitle: const Text('Version 1.0.0 · Stand firm. Pray first.'),
+                      ),
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.privacy_tip_outlined),
+                        title: const Text('Privacy Policy'),
+                        trailing: const Icon(Icons.open_in_new, size: 18),
+                        onTap: () => launchUrl(
+                          Uri.parse(AppStrings.privacyPolicyUrl),
+                          mode: LaunchMode.externalApplication,
+                        ),
                       ),
                     ],
                   ),
