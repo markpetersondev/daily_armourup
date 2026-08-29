@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_colors.dart';
 
-/// Light and dark themes for Armour & Prayer.
+/// Light and dark themes for Armour Up Daily.
 ///
 /// Headings use Playfair Display; body text uses Inter. Both themes are
 /// designed independently — dark mode is warm charcoal/green, not inverted.

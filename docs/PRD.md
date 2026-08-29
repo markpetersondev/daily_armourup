@@ -1,4 +1,4 @@
-# Armour & Prayer — Product Requirements Document
+# Armour Up Daily — Product Requirements Document
 
 **Version:** 1.0
 **Status:** Built, pre-launch
@@ -8,7 +8,7 @@
 
 ## 1. One-Line Summary
 
-Armour & Prayer is a private daily companion for Christians who want to build
+Armour Up Daily is a private daily companion for Christians who want to build
 consistent spiritual habits — and who need real help in the moment temptation,
 anxiety, or discouragement actually hits.
 

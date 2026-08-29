@@ -20,7 +20,7 @@ void main() {
     await tester.pumpWidget(await _buildApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Armour & Prayer'), findsOneWidget);
+    expect(find.text('Armour Up Daily'), findsOneWidget);
     expect(find.text('Begin My Journey'), findsOneWidget);
   });
 

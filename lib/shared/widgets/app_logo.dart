@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/app_colors.dart';
 
-/// The Armour & Prayer mark: a gold-rimmed shield with a subtle cross,
+/// The Armour Up Daily mark: a gold-rimmed shield with a subtle cross,
 /// composed from clean shapes — no cartoonish artwork.
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, this.size = 96});
@@ -12,7 +12,7 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Armour & Prayer emblem',
+      label: 'Armour Up Daily emblem',
       child: SizedBox(
         width: size,
         height: size * 1.12,

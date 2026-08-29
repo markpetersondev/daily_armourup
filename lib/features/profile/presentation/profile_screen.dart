@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_strings.dart';
 import '../../../core/router/app_router.dart';
 import '../../../shared/providers/app_providers.dart';
 import '../../../shared/providers/habit_providers.dart';
@@ -245,10 +246,10 @@ class ProfileScreen extends ConsumerWidget {
                             style: theme.textTheme.titleMedium),
                       ),
                       const Divider(height: 1),
-                      const ListTile(
-                        leading: Icon(Icons.info_outline),
-                        title: Text('Armour & Prayer'),
-                        subtitle: Text('Version 1.0.0 · Stand firm. Pray first.'),
+                      ListTile(
+                        leading: const Icon(Icons.info_outline),
+                        title: const Text(AppStrings.appName),
+                        subtitle: const Text('Version 1.0.0 · Stand firm. Pray first.'),
                       ),
                     ],
                   ),

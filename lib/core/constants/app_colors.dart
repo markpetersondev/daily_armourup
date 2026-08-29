@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Brand palette for Armour & Prayer.
+/// Brand palette for Armour Up Daily.
 abstract final class AppColors {
   static const deepCharcoal = Color(0xFF151816);
   static const forestGreen = Color(0xFF254A3D);

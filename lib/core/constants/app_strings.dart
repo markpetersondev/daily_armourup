@@ -1,6 +1,6 @@
-/// Central copy for Armour & Prayer. Grace-centered language only.
+/// Central copy for Armour Up Daily. Grace-centered language only.
 abstract final class AppStrings {
-  static const appName = 'Armour & Prayer';
+  static const appName = 'Armour Up Daily';
   static const tagline = 'Stand firm. Pray first.';
   static const defaultName = 'Friend';
 

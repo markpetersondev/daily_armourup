@@ -535,7 +535,7 @@ class ReadyStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return _StepLayout(
-      primaryLabel: 'Enter Armour & Prayer',
+      primaryLabel: 'Enter ${AppStrings.appName}',
       onPrimary: onFinish,
       footnote: 'One faithful step at a time.',
       child: Column(
