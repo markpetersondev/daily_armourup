@@ -47,10 +47,6 @@ class HomeScreen extends ConsumerWidget {
                       text: verse.text,
                       reference: verse.reference,
                       category: 'Daily Verse'),
-                  onShare: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Sharing is on its way in a coming update.')),
-                  ),
                   onReflect: () => context.go(AppRoutes.journal),
                 ),
                 const SizedBox(height: 28),

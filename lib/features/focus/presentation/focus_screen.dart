@@ -12,13 +12,11 @@ class FocusSessionConfig {
   const FocusSessionConfig({
     required this.mode,
     required this.duration,
-    required this.ambientSound,
     required this.showVerse,
   });
 
   final FocusMode mode;
   final Duration duration;
-  final bool ambientSound;
   final bool showVerse;
 }
 
@@ -33,7 +31,6 @@ class FocusScreen extends StatefulWidget {
 class _FocusScreenState extends State<FocusScreen> {
   FocusMode _mode = FocusMode.prayer;
   Duration _duration = const Duration(minutes: 10);
-  bool _ambientSound = false;
   bool _showVerse = true;
 
   Future<void> _pickCustomDuration() async {
@@ -139,16 +136,6 @@ class _FocusScreenState extends State<FocusScreen> {
                   child: Column(
                     children: [
                       SwitchListTile(
-                        value: _ambientSound,
-                        onChanged: (v) =>
-                            setState(() => _ambientSound = v),
-                        contentPadding: EdgeInsets.zero,
-                        title: const Text('Ambient sound'),
-                        subtitle: const Text('A gentle atmosphere indicator'),
-                        secondary: const Icon(Icons.graphic_eq_outlined,
-                            color: AppColors.warmGold),
-                      ),
-                      SwitchListTile(
                         value: _showVerse,
                         onChanged: (v) => setState(() => _showVerse = v),
                         contentPadding: EdgeInsets.zero,
@@ -190,7 +177,6 @@ class _FocusScreenState extends State<FocusScreen> {
                     extra: FocusSessionConfig(
                       mode: _mode,
                       duration: _duration,
-                      ambientSound: _ambientSound,
                       showVerse: _showVerse,
                     ),
                   ),

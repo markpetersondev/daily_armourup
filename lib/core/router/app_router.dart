@@ -77,7 +77,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               : const FocusSessionConfig(
                   mode: FocusMode.prayer,
                   duration: Duration(minutes: 10),
-                  ambientSound: false,
                   showVerse: true,
                 );
           return FocusSessionScreen(config: config);

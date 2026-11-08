@@ -147,10 +147,6 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
               const SizedBox(width: 10),
               Text(widget.config.mode.label,
                   style: theme.textTheme.titleMedium),
-              const Spacer(),
-              if (widget.config.ambientSound)
-                Icon(Icons.graphic_eq_outlined,
-                    size: 20, color: theme.colorScheme.onSurfaceVariant),
             ],
           ),
           const Spacer(),

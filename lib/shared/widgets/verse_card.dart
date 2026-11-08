@@ -5,21 +5,19 @@ import '../../core/constants/app_colors.dart';
 import '../models/verse.dart';
 
 /// Large featured verse card with a deep-green gradient, subtle light rays,
-/// and save / share / reflect actions.
+/// and save / reflect actions.
 class VerseCard extends StatelessWidget {
   const VerseCard({
     super.key,
     required this.verse,
     required this.isSaved,
     required this.onSave,
-    required this.onShare,
     required this.onReflect,
   });
 
   final Verse verse;
   final bool isSaved;
   final VoidCallback onSave;
-  final VoidCallback onShare;
   final VoidCallback onReflect;
 
   @override
@@ -111,12 +109,6 @@ class VerseCard extends StatelessWidget {
                           icon: isSaved ? Icons.bookmark : Icons.bookmark_outline,
                           label: isSaved ? 'Saved' : 'Save',
                           onTap: onSave,
-                        ),
-                        const SizedBox(width: 10),
-                        _VerseAction(
-                          icon: Icons.ios_share_outlined,
-                          label: 'Share',
-                          onTap: onShare,
                         ),
                         const Spacer(),
                         Material(
