@@ -13,7 +13,10 @@ abstract final class AppTheme {
 
   static TextTheme _textTheme(Color body, Color heading) {
     final base = GoogleFonts.interTextTheme();
-    final serif = GoogleFonts.playfairDisplay(color: heading);
+    // Request the weight here, not via copyWith: google_fonts picks the font
+    // file at creation time, so copyWith would keep the Regular file.
+    final serif =
+        GoogleFonts.playfairDisplay(color: heading, fontWeight: FontWeight.w600);
     return base
         .apply(bodyColor: body, displayColor: heading)
         .copyWith(
