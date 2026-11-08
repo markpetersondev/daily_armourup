@@ -200,20 +200,6 @@ class ProfileScreen extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   child: Column(
                     children: [
-                      SwitchListTile(
-                        value: profile.journalLockEnabled,
-                        onChanged: (v) => ref
-                            .read(userProfileProvider.notifier)
-                            .update(profile.copyWith(journalLockEnabled: v)),
-                        secondary: const Icon(Icons.lock_outline,
-                            color: AppColors.warmGold),
-                        title: const Text('Journal Privacy Lock'),
-                        subtitle: const Text(
-                            'Add an extra layer of privacy before opening '
-                            'your journal. This is an app setting, not device '
-                            'security.'),
-                      ),
-                      const Divider(height: 1),
                       const ListTile(
                         leading: Icon(Icons.phonelink_lock_outlined),
                         title: Text('Stored on this device'),
@@ -260,6 +246,17 @@ class ProfileScreen extends ConsumerWidget {
                         onTap: () => launchUrl(
                           Uri.parse(AppStrings.privacyPolicyUrl),
                           mode: LaunchMode.externalApplication,
+                        ),
+                      ),
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.description_outlined),
+                        title: const Text('Open-source licences'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => showLicensePage(
+                          context: context,
+                          applicationName: AppStrings.appName,
+                          applicationVersion: '1.0.0',
                         ),
                       ),
                     ],
