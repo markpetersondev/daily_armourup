@@ -214,8 +214,8 @@ Habit-building without the shame.
 Timed sessions for undistracted time with God, in five modes: **Prayer · Bible
 Reading · Worship · Quiet Reflection · Resist Distraction.**
 
-Users choose a duration, optionally show a verse on screen and enable ambient
-sound, and can write a short reflection when the timer ends.
+Users choose a duration, optionally show a verse on screen, and can write a short
+reflection when the timer ends. Ambient sound is deferred until after the MVP.
 
 ### 7.8 Prayer Library
 

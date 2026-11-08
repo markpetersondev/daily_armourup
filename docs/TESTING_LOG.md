@@ -5,10 +5,27 @@ Keep [Open issues](#open-issues) and [Feature gaps](#feature-gaps) current.
 
 ## Test sessions
 
+### 8 Nov 2026: Android device, visual fixes
+
+**Result:** passed. No crashes, font errors or layout overflow errors in the logs.
+
+Same phone and debug build setup as the session below, on commit `cdf8a8e` plus the
+uncommitted fixes.
+
+| Check | Result |
+|---|---|
+| Home verse card | Pass, shows Save and Reflect only, and the layout holds |
+| Stat numbers on Home and Your Spiritual Rhythm | Pass, "0" no longer looks like "O" |
+| Sacred Focus options | Pass, Ambient sound gone, Verse prompt still there |
+| Starting a Focus session | Pass, timer counts down with full-height digits, no sound icon |
+| Onboarding after a reset | Pass, 5 steps |
+
+Only the first few seconds of a Focus session were run, not a full one. These fixes
+haven't been run on iOS.
+
 ### 8 Nov 2026: Android device
 
-**Result:** passed, with one visual issue (numerals, see [Open issues](#open-issues)).
-No crashes, font errors or layout overflow errors appeared in the logs.
+**Result:** passed, with one visual issue (numerals, since fixed). No crashes, font errors or layout overflow errors appeared in the logs.
 
 | Item | Details |
 |---|---|
@@ -79,7 +96,7 @@ Run after the reminder UI was hidden:
 - [ ] Real iPhone. It wasn't usable with Xcode 15.1
 - [ ] Build with Xcode 26 or later, and retest after the macOS, Xcode and Flutter upgrade
 - [ ] iOS release build, archive upload and TestFlight
-- [ ] Reminder-hiding changes on iOS
+- [ ] Reminder-hiding changes and the visual fixes on iOS
 - [ ] Launch screen colour on iOS, which shows too briefly for the test to capture
 - [ ] Rotating an iPhone (the portrait setting is confirmed in the build only)
 - [ ] App running on iPad in iPhone compatibility mode
@@ -99,10 +116,10 @@ Run after the reminder UI was hidden:
 - [ ] Journal: create, edit and delete entries, and each entry type
 - [ ] Scripture: search, filters, saving, copying, notes and memory quiz
 - [ ] Practices: tracking, adding and editing habits
-- [ ] Sacred Focus: running a full session
+- [ ] Sacred Focus: running a full session and writing the reflection at the end
 - [ ] Prayer library: browsing and saving
 - [ ] Mood check-in on Home
-- [ ] Home verse: Save, Share and Reflect
+- [ ] Home verse: Save and Reflect
 - [ ] Rescue: "Yes, I feel stronger" and "I still need help" outcomes
 - [ ] Rescue: "Read another verse", "Save verse", and the other actions
 - [ ] Recovery: saving the optional reflection notes
@@ -116,9 +133,6 @@ Run after the reminder UI was hidden:
 
 | Issue | Where | Severity | Status |
 |---|---|---|---|
-| Playfair's old-style numerals make "0" look like the letter O and "1" like a small capital I | Stat tiles on Home and Your Spiritual Rhythm | Medium, visible on main screens | Open, side effect of the font fix |
-| Share button only shows "Sharing is on its way in a coming update." | Home verse card, `home_screen.dart:50` | High, placeholder that App Review could reject | Open |
-| "Ambient sound" toggle plays no sound, only showing an icon during the session. The app has no audio package | Sacred Focus, `focus_screen.dart:142` | High, misleading and App Review could reject it | Open |
 | Labels cut off on a small phone: "Start Focus Sessi…" and "See your faithful ste…" | Home Quick actions | Low | Open |
 | Mixed spelling: "armour" in headings, "armor" in verses | My Armour and elsewhere | Low | Open, depends on the Scripture translation decision |
 | Deprecated radio properties | `profile_screen.dart:174` | Low | Open |
@@ -133,11 +147,9 @@ Features described in the PRD or shown in the app that aren't available in the M
 | Backup (PRD 7.12) | Not built | Post-MVP, removed from the App Store description |
 | Journal Privacy Lock | Toggle saved a setting but locked nothing, now removed | Removed for v1; needs `local_auth` if built later |
 | Crisis support note | Built but hidden | Post-MVP, see [IOS_SETUP.md](IOS_SETUP.md) step 4.9 |
-| Verse sharing | Placeholder message only | Not decided |
-| Ambient sound | Toggle with no audio | Not decided |
+| Verse sharing | Placeholder button removed | Out of scope for v1, as the PRD states |
+| Ambient sound (PRD 7.7) | Toggle played no audio, now removed | Post-MVP; needs an audio package and sounds |
 | iPad layout | Not supported on iOS | iPhone only for v1 |
-
-The PRD lists sharing as out of scope for v1, so the Share button could simply be removed.
 
 ## Remaining release blockers
 
@@ -148,6 +160,5 @@ The PRD lists sharing as out of scope for v1, so the Share button could simply b
 | macOS, Xcode and Flutter upgrade | Owner | Not started |
 | Privacy policy rewrite, because the live text doesn't match the app | Owner | Open |
 | Support page | Owner | Open |
-| App Store screenshots | After the visual fixes | Open |
-| Share button and ambient sound decisions | Owner | Open |
+| App Store screenshots | After the upgrade | Open |
 | Crisis sentence in the App Store description: keep or remove | Owner | Open |
