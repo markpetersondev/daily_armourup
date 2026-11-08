@@ -254,10 +254,16 @@ apps over third-party rights (guideline 5.2).
 Verses appear in `scripture_library.dart`, `rescue_content.dart`, `prayer_library.dart`,
 `focus_content.dart`, `verse.dart` and `app_providers.dart`. This isn't legal advice.
 
-### 4.9 Add crisis support wording (recommended)
+### 4.9 Add crisis support wording (deferred until after the MVP)
 
-Rescue offers help with anxiety, addiction and negative thoughts, but I found no crisis
-wording in the app. Add a short line to Rescue and Recovery, for example:
+> **Status:** built, but hidden for the MVP release by decision. The widget is in
+> `lib/features/rescue/widgets/crisis_support_note.dart`. To turn it back on, uncomment
+> the marked lines (the import and the note at the end of the list) in
+> `rescue_screen.dart` and `recovery_screen.dart`.
+
+Rescue offers help with anxiety, addiction and negative thoughts, and the app has no
+crisis wording while this note is hidden. The note adds a short line to Rescue and
+Recovery:
 
 > If you're in danger or thinking of harming yourself, please contact your local
 > emergency services or someone you trust right now.

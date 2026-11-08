@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../shared/widgets/app_logo.dart';
 import '../../../shared/widgets/premium_card.dart';
 import '../data/rescue_content.dart';
+// import '../widgets/crisis_support_note.dart';
 
 /// Rescue start: a calm landing with category cards that open the guided flow.
 class RescueScreen extends StatelessWidget {
@@ -98,6 +99,9 @@ class RescueScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.9.
+                // const SizedBox(height: 24),
+                // const CrisisSupportNote(),
               ],
             ),
           ),

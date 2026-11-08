@@ -9,6 +9,7 @@ import '../../../shared/widgets/buttons.dart';
 import '../../../shared/widgets/guided_prayer_view.dart';
 import '../../../shared/widgets/premium_card.dart';
 import '../data/rescue_content.dart';
+// import '../widgets/crisis_support_note.dart';
 
 /// The compassionate Recovery flow shown after a slip. Nothing is reset;
 /// the user is invited to return, reflect, and begin again.
@@ -183,6 +184,9 @@ class _RecoveryScreenState extends ConsumerState<RecoveryScreen> {
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),
                 ),
+                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.9.
+                // const SizedBox(height: 28),
+                // const CrisisSupportNote(),
               ],
             ),
           ),

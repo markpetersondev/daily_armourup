@@ -275,7 +275,7 @@ you can reply with an explanation or file an appeal.
 | Listing claims don't match the app | 2.3 | Don't mention backup, and only describe what's in the build |
 | Privacy policy doesn't match the app | 5.1.1 | Complete step 2 |
 | Scripture licensing | 5.2 | Resolve IOS_SETUP step 4.8 |
-| Health claims | 1.4 | Don't claim to treat addiction or anxiety |
+| Health claims | 1.4 | Don't claim to treat addiction or anxiety. The in-app crisis note is hidden for the MVP (IOS_SETUP step 4.9), so be ready to turn it back on if App Review asks |
 | Crashes or broken layouts on iPad | 2.1, 4 | Open the iPhone app on an iPad simulator, because App Review may test there |
 
 ## 13. After launch
