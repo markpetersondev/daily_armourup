@@ -7,7 +7,9 @@ import '../../../core/router/app_router.dart';
 import '../providers/onboarding_provider.dart';
 import 'onboarding_steps.dart';
 
-/// Six-step onboarding: welcome, name, focus areas, goals, reminders, ready.
+/// Five-step onboarding: welcome, name, focus areas, goals, ready.
+/// The reminders step is hidden for the MVP release (no notifications yet);
+/// see docs/IOS_SETUP.md step 4.6.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -16,7 +18,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  static const _stepCount = 6;
+  static const _stepCount = 5; // 6 with the reminders step
 
   final _pageController = PageController();
   int _step = 0;
@@ -135,7 +137,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       NameStep(onNext: _next),
                       FocusAreasStep(onNext: _next),
                       GoalsStep(onNext: _next),
-                      RemindersStep(onNext: _next),
+                      // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                      // RemindersStep(onNext: _next),
                       ReadyStep(onFinish: _finish),
                     ],
                   ),

@@ -9,7 +9,8 @@ import '../../../shared/widgets/section_header.dart';
 import '../../onboarding/data/onboarding_options.dart';
 import 'profile_screen.dart' show goalLabel;
 
-/// Edit name, focus areas, spiritual goals, and reminder times.
+/// Edit name, focus areas, spiritual goals, and reminder times (the reminder
+/// section is hidden for the MVP; saved preferences are kept unchanged).
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key});
 
@@ -165,39 +166,40 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ),
                   ),
                 ],
-                const SizedBox(height: 18),
-                const SectionHeader(
-                  title: 'Reminders',
-                  subtitle: 'Gentle nudges at the moments you choose.',
-                ),
-                _reminderTile(
-                  'Morning start',
-                  _reminders.morningEnabled,
-                  _reminders.morningMinutes,
-                  (v) => _reminders = _reminders.copyWith(morningEnabled: v),
-                  (m) => _reminders = _reminders.copyWith(morningMinutes: m),
-                ),
-                _reminderTile(
-                  'Midday prayer',
-                  _reminders.middayEnabled,
-                  _reminders.middayMinutes,
-                  (v) => _reminders = _reminders.copyWith(middayEnabled: v),
-                  (m) => _reminders = _reminders.copyWith(middayMinutes: m),
-                ),
-                _reminderTile(
-                  'Evening reflection',
-                  _reminders.eveningEnabled,
-                  _reminders.eveningMinutes,
-                  (v) => _reminders = _reminders.copyWith(eveningEnabled: v),
-                  (m) => _reminders = _reminders.copyWith(eveningMinutes: m),
-                ),
-                _reminderTile(
-                  'Strength check-in',
-                  _reminders.highRiskEnabled,
-                  _reminders.highRiskMinutes,
-                  (v) => _reminders = _reminders.copyWith(highRiskEnabled: v),
-                  (m) => _reminders = _reminders.copyWith(highRiskMinutes: m),
-                ),
+                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                // const SizedBox(height: 18),
+                // const SectionHeader(
+                //   title: 'Reminders',
+                //   subtitle: 'Gentle nudges at the moments you choose.',
+                // ),
+                // _reminderTile(
+                //   'Morning start',
+                //   _reminders.morningEnabled,
+                //   _reminders.morningMinutes,
+                //   (v) => _reminders = _reminders.copyWith(morningEnabled: v),
+                //   (m) => _reminders = _reminders.copyWith(morningMinutes: m),
+                // ),
+                // _reminderTile(
+                //   'Midday prayer',
+                //   _reminders.middayEnabled,
+                //   _reminders.middayMinutes,
+                //   (v) => _reminders = _reminders.copyWith(middayEnabled: v),
+                //   (m) => _reminders = _reminders.copyWith(middayMinutes: m),
+                // ),
+                // _reminderTile(
+                //   'Evening reflection',
+                //   _reminders.eveningEnabled,
+                //   _reminders.eveningMinutes,
+                //   (v) => _reminders = _reminders.copyWith(eveningEnabled: v),
+                //   (m) => _reminders = _reminders.copyWith(eveningMinutes: m),
+                // ),
+                // _reminderTile(
+                //   'Strength check-in',
+                //   _reminders.highRiskEnabled,
+                //   _reminders.highRiskMinutes,
+                //   (v) => _reminders = _reminders.copyWith(highRiskEnabled: v),
+                //   (m) => _reminders = _reminders.copyWith(highRiskMinutes: m),
+                // ),
                 const SizedBox(height: 28),
                 PrimaryButton(
                   label: 'Save Changes',
@@ -212,6 +214,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );
   }
 
+  // Kept for after the MVP, when reminders ship; unused until then.
+  // ignore: unused_element
   Widget _reminderTile(
     String label,
     bool enabled,

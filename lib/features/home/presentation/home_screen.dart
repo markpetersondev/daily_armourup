@@ -70,8 +70,9 @@ class HomeScreen extends ConsumerWidget {
                 const SizedBox(height: 28),
                 const SectionHeader(title: 'Quick actions'),
                 const _QuickActions(),
-                const SizedBox(height: 28),
-                _UpcomingReminder(prefs: profile.reminderPreferences),
+                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                // const SizedBox(height: 28),
+                // _UpcomingReminder(prefs: profile.reminderPreferences),
               ],
             ),
           ),
@@ -544,6 +545,8 @@ class _QuickActions extends StatelessWidget {
 // Upcoming reminder
 // ---------------------------------------------------------------------------
 
+// Kept for after the MVP, when reminders ship; unused until then.
+// ignore: unused_element
 class _UpcomingReminder extends StatelessWidget {
   const _UpcomingReminder({required this.prefs});
 
