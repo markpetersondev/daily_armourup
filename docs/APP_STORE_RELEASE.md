@@ -9,8 +9,8 @@ official pages.
 ## Before you start
 
 - [ ] The app is built with Xcode 26 or later
-- [ ] Reminders work on a real iPhone
-- [ ] The Journal Privacy Lock toggle is removed or actually works
+- [ ] The app works on a real iPhone
+- [ ] Reminders and the crisis note are still hidden (both are post-MVP)
 - [ ] The Scripture licence is resolved
 - [ ] The privacy policy is corrected (step 2)
 - [ ] A support page is live (step 3)
@@ -51,7 +51,7 @@ The rewritten policy should say:
 - You don't collect, receive, sell or share any of it, and the app has no accounts,
   ads, analytics or tracking.
 - Data may be included in the user's own device or iCloud backup, under Apple's terms.
-- Reminders are scheduled locally, and notification permission is optional.
+- The app sends no notifications.
 - Users can erase everything with Profile > **Reset all app data**, or by deleting the
   app.
 - The app opens external links, such as the policy itself, in the browser.
@@ -64,8 +64,7 @@ your postal address, so decide whether you want that public.
 
 Apple requires a support URL, and the project doesn't have one yet. A simple GitHub
 Pages page is enough. Include the app name, a contact email, a short FAQ and a link to
-the privacy policy. For the FAQ, cover where data is stored, how to change reminders,
-and that deleting the app or using reset erases data permanently because there's no
+the privacy policy. For the FAQ, cover where data is stored, and that deleting the app or using reset erases data permanently because there's no
 backup.
 
 ## 4. Create the app record
@@ -119,7 +118,6 @@ YOUR DAILY RHYTHM
 • A new verse each day, saveable in one tap
 • One gentle next step — never a to-do list
 • Build daily practices — prayer, Scripture reading, journaling, gratitude — at your own pace
-• Gentle reminders at the times you choose, each one easy to turn off
 
 RESCUE — HELP WHEN YOU NEED IT MOST
 One tap from anywhere in the app. Choose what you're facing — temptation, anxiety, anger, loneliness, and more — and get a guided path: breathe, Scripture chosen for that struggle, a matched prayer, and a concrete next step. Leave at any point; reaching for help always counts.
@@ -230,8 +228,7 @@ TestFlight anyway because it's the build your users will get.
 
 1. Open the **TestFlight** tab and add yourself to an internal testing group.
 2. Install the **TestFlight** app on your iPhone and install the build.
-3. Repeat the checklist from [IOS_SETUP.md](IOS_SETUP.md#5-test-the-app), and leave
-   reminders running for a few days.
+3. Repeat the checklist from [IOS_SETUP.md](IOS_SETUP.md#5-test-the-app).
 4. Optionally add external testers by email or public link. Their first build goes
    through a short Beta App Review.
 
@@ -245,8 +242,6 @@ notes:
 Armour Up Daily is a private Christian devotional app. It has no accounts, login, in-app purchases, ads, or analytics, and all user data stays on the device. No demo account is needed, and the app works offline.
 
 To review: complete the short onboarding, then tap Rescue, choose a category, and follow the guided flow (breathing, Scripture, prayer, next step).
-
-Reminders are local notifications, set during onboarding or under Profile > Edit Profile. Permission is optional, and the app works without it.
 
 Rescue addresses struggles such as temptation, anxiety, and addiction through prayer and Scripture only. It contains no explicit content and doesn't provide medical advice.
 ```
@@ -271,7 +266,7 @@ you can reply with an explanation or file an appeal.
 
 | Likely risk | Guideline | How to avoid it |
 |---|---|---|
-| Features that don't work or look unfinished | 2.1 | Build reminders, remove the lock toggle and the "later update" text |
+| Features that don't work or look unfinished | 2.1 | Keep reminders hidden until they're built, and keep the lock toggle removed |
 | Listing claims don't match the app | 2.3 | Don't mention backup, and only describe what's in the build |
 | Privacy policy doesn't match the app | 5.1.1 | Complete step 2 |
 | Scripture licensing | 5.2 | Resolve IOS_SETUP step 4.8 |

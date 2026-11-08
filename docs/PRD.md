@@ -247,6 +247,9 @@ reflection question. This is the app's namesake and its theological spine.
 
 ### 7.11 Reminders
 
+> **Deferred until after the MVP.** The reminder UI is built but hidden, and no
+> notifications are sent in v1. See `docs/IOS_SETUP.md` step 4.6.
+
 Up to four daily reminders — morning, midday, evening, and a user-chosen
 high-risk hour. All times are user-configurable and every reminder can be turned
 off individually. Notifications are gentle invitations ("Begin the day anchored

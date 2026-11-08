@@ -19,8 +19,8 @@ Apple's requirements were checked on 4 Nov 2026. They change often, so see
 | Deployment target | iOS 12.0 | iOS 15.0 |
 | Devices | iPhone and iPad | iPhone only for v1 |
 | Orientation on iPhone | Portrait and landscape | Portrait only |
-| Reminders | Settings only, nothing fires | Real notifications |
-| Journal Privacy Lock | Toggle saves a value but locks nothing | Remove for v1, or build it |
+| Reminders | Settings only, nothing fires | Hidden for the MVP (step 4.6) |
+| Journal Privacy Lock | Toggle saves a value but locks nothing | Removed for v1 |
 | Scripture text | Wording looks like NIV, no attribution | Licensed with notice, or public domain |
 
 **The macOS and Xcode upgrade comes first.** Apple rejects uploads not built with
@@ -170,11 +170,24 @@ The launch images are 1×1 placeholders, so launch shows a plain screen. Open
 `ios/Runner/Base.lproj/LaunchScreen.storyboard` in Xcode and set the view background
 to the brand green `#123D2B`, the same colour as the Android icon background.
 
-### 4.6 Build the reminders
+### 4.6 Build the reminders (deferred until after the MVP)
 
-Users can set four reminders today, and home shows a "Coming up" card with a bell
-icon, but nothing is ever sent. The onboarding footnote says notifications arrive in a
-later update. App Review can treat that as an unfinished feature.
+> **Status:** reminders aren't part of the MVP. Their UI is hidden by commenting it out,
+> marked with "Hidden for the MVP release" in:
+>
+> - `onboarding_screen.dart`: the reminders step, with the step count set to 5
+>   (restore it to 6)
+> - `home_screen.dart`: the "Coming up" card
+> - `edit_profile_screen.dart`: the Reminders section
+>
+> Saved reminder preferences stay in the profile data. When reminders ship, uncomment
+> those lines, remove the `// ignore: unused_element` lines above `_UpcomingReminder`
+> and `_reminderTile`, and follow the steps below.
+
+Before they were hidden, users could set four reminders and home showed a "Coming up"
+card with a bell icon, but nothing was ever sent. The onboarding footnote said
+notifications arrive in a later update. App Review can treat that as an unfinished
+feature, which is why the UI is hidden rather than left in.
 
 **Add the packages:**
 
