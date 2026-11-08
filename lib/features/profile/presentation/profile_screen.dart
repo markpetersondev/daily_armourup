@@ -249,6 +249,12 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                       ),
                       const Divider(height: 1),
+                      const ListTile(
+                        leading: Icon(Icons.menu_book_outlined),
+                        title: Text('Scripture'),
+                        subtitle: Text(AppStrings.scriptureCredit),
+                      ),
+                      const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.description_outlined),
                         title: const Text('Open-source licences'),

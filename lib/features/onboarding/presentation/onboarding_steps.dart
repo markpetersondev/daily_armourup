@@ -564,7 +564,7 @@ class ReadyStep extends StatelessWidget {
           ),
           const SizedBox(height: 36),
           Text(
-            '“Put on the full armor of God, so that you can take your stand against the devil\'s schemes.”',
+            '“Put on the full armor of God, so that you can make your stand against the devil’s schemes.”',
             style: theme.textTheme.headlineMedium?.copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),

@@ -36,7 +36,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for strength',
     icon: Icons.fitness_center_outlined,
     verse: Verse(
-      text: 'The Lord is my strength and my shield; my heart trusts in him, and he helps me.',
+      text: 'The LORD is my strength and my shield; my heart trusts in Him, and I am helped.',
       reference: 'Psalm 28:7',
     ),
     lines: [
@@ -54,7 +54,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer when tempted',
     icon: Icons.shield_outlined,
     verse: Verse(
-      text: 'Watch and pray so that you will not fall into temptation.',
+      text: 'Watch and pray so that you will not enter into temptation.',
       reference: 'Matthew 26:41',
     ),
     lines: [
@@ -72,7 +72,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for purity',
     icon: Icons.spa_outlined,
     verse: Verse(
-      text: 'Create in me a pure heart, O God, and renew a steadfast spirit within me.',
+      text: 'Create in me a clean heart, O God, and renew a right spirit within me.',
       reference: 'Psalm 51:10',
     ),
     lines: [
@@ -89,7 +89,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for anxiety',
     icon: Icons.air_outlined,
     verse: Verse(
-      text: 'Cast all your anxiety on him because he cares for you.',
+      text: 'Cast all your anxiety on Him, because He cares for you.',
       reference: '1 Peter 5:7',
     ),
     lines: [
@@ -106,7 +106,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for forgiveness',
     icon: Icons.volunteer_activism_outlined,
     verse: Verse(
-      text: 'If we confess our sins, he is faithful and just and will forgive us our sins.',
+      text: 'If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.',
       reference: '1 John 1:9',
     ),
     lines: [
@@ -140,7 +140,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer before sleep',
     icon: Icons.nightlight_outlined,
     verse: Verse(
-      text: 'In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.',
+      text: 'I will lie down and sleep in peace, for You alone, O LORD, make me dwell in safety.',
       reference: 'Psalm 4:8',
     ),
     lines: [
@@ -157,7 +157,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Morning prayer',
     icon: Icons.wb_sunny_outlined,
     verse: Verse(
-      text: 'Because of the Lord\'s great love we are not consumed, for his compassions never fail. They are new every morning.',
+      text: 'Because of the loving devotion of the LORD we are not consumed, for His mercies never fail. They are new every morning; great is Your faithfulness!',
       reference: 'Lamentations 3:22-23',
     ),
     lines: [
@@ -174,7 +174,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for discipline',
     icon: Icons.timer_outlined,
     verse: Verse(
-      text: 'No discipline seems pleasant at the time, but painful. Later on, however, it produces a harvest.',
+      text: 'No discipline seems enjoyable at the time, but painful. Later on, however, it yields a harvest of righteousness and peace to those who have been trained by it.',
       reference: 'Hebrews 12:11',
     ),
     lines: [
@@ -208,7 +208,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer for a loved one',
     icon: Icons.favorite_outline,
     verse: Verse(
-      text: 'I pray that out of his glorious riches he may strengthen you with power through his Spirit in your inner being.',
+      text: 'I ask that out of the riches of His glory He may strengthen you with power through His Spirit in your inner being.',
       reference: 'Ephesians 3:16',
     ),
     lines: [
@@ -225,7 +225,7 @@ const List<Prayer> prayerLibrary = [
     title: 'Prayer after failure',
     icon: Icons.restart_alt_outlined,
     verse: Verse(
-      text: 'Though the righteous fall seven times, they rise again.',
+      text: 'For though a righteous man may fall seven times, he still gets up.',
       reference: 'Proverbs 24:16',
     ),
     lines: [

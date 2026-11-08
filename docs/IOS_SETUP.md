@@ -21,7 +21,7 @@ Apple's requirements were checked on 4 Nov 2026. They change often, so see
 | Orientation on iPhone | Portrait and landscape | Portrait only |
 | Reminders | Settings only, nothing fires | Hidden for the MVP (step 4.6) |
 | Journal Privacy Lock | Toggle saves a value but locks nothing | Removed for v1 |
-| Scripture text | Wording looks like NIV, no attribution | Licensed with notice, or public domain |
+| Scripture text | Berean Standard Bible, credited in the app | Done (step 4.8) |
 
 **The macOS and Xcode upgrade comes first.** Apple rejects uploads not built with
 Xcode 26+, and Xcode 26 can't run on your current macOS.
@@ -251,21 +251,23 @@ their journal is protected when it isn't.
 model so existing saved data still loads. Building a real lock later needs `local_auth`
 and an `NSFaceIDUsageDescription` entry in `Info.plist`.
 
-### 4.8 Resolve the Scripture licence
+### 4.8 Scripture licence (resolved)
 
-The verses have no translation name or copyright notice, and the wording looks like
-the NIV. For example, Ephesians 6:11 in
-[verse.dart](../lib/shared/models/verse.dart) reads "take your stand against the
-devil's schemes". Please confirm which translation you used. Apple can reject or remove
-apps over third-party rights (guideline 5.2).
+All Scripture now comes from the Berean Standard Bible (BSB), which is
+[dedicated to the public domain](https://berean.bible/terms.htm). It replaced the earlier
+text, which was copied from ChatGPT and looked like the NIV.
 
-| Option | What it takes | Note |
-|---|---|---|
-| **Switch to a public domain translation (recommended)** | Replace the verse text with the World English Bible or Berean Standard Bible | No permission needed, but check each translation's current terms and re-read each verse in its context |
-| Keep the NIV | Follow [Biblica's permissions](https://www.biblica.com/permissions/), and add the required notice | Biblica's pages differ on digital use, and its terms ask for the notice on each page showing NIV text. Get written confirmation for an app |
+- **Source:** `https://bereanbible.com/bsb.txt`, downloaded 8 Nov 2026 (SHA-256 starts
+  `2ac3af1de52d4e68`).
+- **Coverage:** 100 quotations across 66 references, each checked by script against that
+  file: 77 whole verses and 23 excerpts.
+- **Edits to the source:** outer quotation marks removed because the cards add their own,
+  a capital letter and full stop added to excerpts, and inner quotes in Ephesians 4:26
+  changed to single quotes. Psalm headings are left out.
+- **Credit:** shown under Profile > About.
 
-Verses appear in `scripture_library.dart`, `rescue_content.dart`, `prayer_library.dart`,
-`focus_content.dart`, `verse.dart` and `app_providers.dart`. This isn't legal advice.
+A copy is kept at [scripture/bsb.txt](scripture/bsb.txt). It isn't bundled with the app. Any
+new verse should be copied from that file, not from an AI tool or from memory.
 
 ### 4.9 Add crisis support wording (deferred until after the MVP)
 

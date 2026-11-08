@@ -37,7 +37,8 @@ class _MemoryQuizScreenState extends ConsumerState<MemoryQuizScreen> {
     _words = widget.verse.text.split(' ');
     final candidates = <int>[
       for (var i = 0; i < _words.length; i++)
-        if (_cleanWord(_words[i]).length >= 4) i,
+        // Words joined by a dash ("salvation—whom") would be unfair blanks.
+        if (_cleanWord(_words[i]).length >= 4 && !_words[i].contains('—')) i,
     ];
     candidates.shuffle(Random());
     final hideCount = min(max(2, _words.length ~/ 8), 4);

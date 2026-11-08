@@ -11,7 +11,7 @@ official pages.
 - [ ] The app is built with Xcode 26 or later
 - [ ] The app works on a real iPhone
 - [ ] Reminders and the crisis note are still hidden (both are post-MVP)
-- [ ] The Scripture licence is resolved
+- [x] The Scripture licence is resolved (Berean Standard Bible, see IOS_SETUP step 4.8)
 - [ ] The privacy policy is corrected (step 2)
 - [ ] A support page is live (step 3)
 
@@ -269,7 +269,7 @@ you can reply with an explanation or file an appeal.
 | Features that don't work or look unfinished | 2.1 | Keep reminders hidden until they're built, and keep the lock toggle removed |
 | Listing claims don't match the app | 2.3 | Don't mention backup, and only describe what's in the build |
 | Privacy policy doesn't match the app | 5.1.1 | Complete step 2 |
-| Scripture licensing | 5.2 | Resolve IOS_SETUP step 4.8 |
+| Scripture licensing | 5.2 | Resolved: public domain text, credited under Profile > About |
 | Health claims | 1.4 | Don't claim to treat addiction or anxiety. The in-app crisis note is hidden for the MVP (IOS_SETUP step 4.9), so be ready to turn it back on if App Review asks |
 | Crashes or broken layouts on iPad | 2.1, 4 | Open the iPhone app on an iPad simulator, because App Review may test there |
 

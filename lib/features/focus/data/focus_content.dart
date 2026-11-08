@@ -35,7 +35,7 @@ const Map<FocusMode, FocusModeContent> focusModeContent = {
     description: 'Open the Word without distraction.',
     sessionPrompt: 'Read slowly. Let the words settle.',
     verse: Verse(
-      text: 'Your word is a lamp for my feet, a light on my path.',
+      text: 'Your word is a lamp to my feet and a light to my path.',
       reference: 'Psalm 119:105',
     ),
   ),
@@ -44,7 +44,7 @@ const Map<FocusMode, FocusModeContent> focusModeContent = {
     description: 'Turn your attention to who God is.',
     sessionPrompt: 'Lift your eyes. He is worthy.',
     verse: Verse(
-      text: 'Come, let us bow down in worship, let us kneel before the Lord our Maker.',
+      text: 'O come, let us worship and bow down; let us kneel before the LORD our Maker.',
       reference: 'Psalm 95:6',
     ),
   ),
@@ -53,7 +53,7 @@ const Map<FocusMode, FocusModeContent> focusModeContent = {
     description: 'Sit in stillness before God.',
     sessionPrompt: 'Be still. You are held.',
     verse: Verse(
-      text: 'Be still, and know that I am God.',
+      text: 'Be still and know that I am God.',
       reference: 'Psalm 46:10',
     ),
   ),

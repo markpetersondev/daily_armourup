@@ -39,7 +39,7 @@ const armourPieces = [
     explanation:
         'Righteousness guards the heart. It is not perfection, but a life '
         'turned toward God, covered by the righteousness of Christ.',
-    verseText: 'With the breastplate of righteousness in place.',
+    verseText: 'With the breastplate of righteousness arrayed.',
     verseReference: 'Ephesians 6:14',
     reflection:
         'What area of your heart needs to be brought back under God\'s '
@@ -52,8 +52,7 @@ const armourPieces = [
         'Peace with God steadies every step. Ready feet carry His peace into '
         'anxious rooms and hard conversations.',
     verseText:
-        'With your feet fitted with the readiness that comes from the gospel '
-        'of peace.',
+        'With your feet fitted with the readiness of the gospel of peace.',
     verseReference: 'Ephesians 6:15',
     reflection:
         'Where are you being sent today, and who needs the peace you carry?',
@@ -65,8 +64,7 @@ const armourPieces = [
         'Use faith to stand against fear, doubt, and temptation. Faith does '
         'not remove the arrows — it stops them.',
     verseText:
-        'Take up the shield of faith, with which you can extinguish all the '
-        'flaming arrows of the evil one.',
+        'Take up the shield of faith, with which you can extinguish all the flaming arrows of the evil one.',
     verseReference: 'Ephesians 6:16',
     reflection:
         'What fear or temptation do you need to place behind the shield of '
@@ -91,7 +89,7 @@ const armourPieces = [
         'The Word of God is the one weapon in the armour. Scripture spoken '
         'in the moment of battle cuts through every deception.',
     verseText:
-        'Take the sword of the Spirit, which is the word of God.',
+        'The sword of the Spirit, which is the word of God.',
     verseReference: 'Ephesians 6:17',
     reflection:
         'Which verse could you keep ready this week for the moment you need '

@@ -5,6 +5,18 @@ Keep [Open issues](#open-issues) and [Feature gaps](#feature-gaps) current.
 
 ## Test sessions
 
+### 8 Nov 2026: Scripture replaced with the Berean Standard Bible
+
+**Result:** passed. All 100 quotations across 66 references match the official file, checked
+by script, and old wording is gone. `flutter test` passes. iOS not run.
+
+Checked on the Samsung (debug build): the verse on Home, the longest Rescue verse
+(1 Corinthians 10:13), Scripture search, the My Armour list, the Scripture credit in
+Profile, and the memory quiz on a verse with a dash.
+
+The quiz now skips words joined by a dash, such as "salvation—whom". Not every verse was
+viewed on screen, and no one has read through the new wording in context yet.
+
 ### 8 Nov 2026: Android device, bug fixes
 
 **Result:** passed. The fixes behave correctly on the phone, and no overflow warnings
@@ -202,7 +214,7 @@ Run after the reminder UI was hidden:
 | "Memory" tab label cut off at 200% text | Scripture | Low | Open |
 | Copy shows two messages on Android: "Copied to clipboard" overlaps "Verse copied" | Scripture | Low | Open, Android only |
 | "Reflect" opens the Journal list instead of a new entry | Home verse card | Low | Open |
-| Mixed spelling: "armour" in headings, "armor" in verses | My Armour and elsewhere | Low | Open, depends on the Scripture translation decision |
+| Mixed spelling: "armour" in headings, "armor" in verses | My Armour and elsewhere | Low | Open, verses must stay "armor" as in the Berean text, so only headings could change |
 | Deprecated radio properties | `profile_screen.dart:174` | Low | Open |
 
 ## Feature gaps
@@ -224,7 +236,7 @@ Features described in the PRD or shown in the app that aren't available in the M
 
 | Blocker | Who | Status |
 |---|---|---|
-| Scripture licence: wording looks like the NIV, with no attribution | Owner decision | Open |
+| Prayers, reflections and armour text: confirm the source and review them, as the PRD requires human-written content | Owner | Open |
 | Apple Developer Program enrollment | Owner | Not confirmed |
 | macOS, Xcode and Flutter upgrade | Owner | Not started |
 | Privacy policy rewrite, because the live text doesn't match the app | Owner | Open |

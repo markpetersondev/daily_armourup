@@ -39,8 +39,8 @@ class ArmourScreen extends StatelessWidget {
                           style: theme.textTheme.headlineSmall),
                       const SizedBox(height: 6),
                       Text(
-                        '“…so that you can take your stand against the '
-                        'devil\'s schemes.” — Ephesians 6:11',
+                        '“…so that you can make your stand against the '
+                        'devil’s schemes.” — Ephesians 6:11',
                         style: theme.textTheme.bodyMedium?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                             fontStyle: FontStyle.italic,

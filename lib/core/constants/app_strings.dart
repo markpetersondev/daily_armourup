@@ -12,6 +12,10 @@ abstract final class AppStrings {
   static const privacyPolicyUrl =
       'https://markpetersondev.github.io/armour-up-privacy/';
 
+  static const scriptureCredit =
+      'Scripture quotations are from the Berean Standard Bible (BSB), '
+      'dedicated to the public domain.';
+
   static const graceLines = [
     'One faithful step at a time.',
     'Grace meets you here.',

@@ -26,29 +26,29 @@ enum RescueCategory {
 const Map<RescueCategory, List<Verse>> rescueVerses = {
   RescueCategory.lust: [
     Verse(
-      text: 'No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear.',
+      text: 'No temptation has seized you except what is common to man. And God is faithful; He will not let you be tempted beyond what you can bear. But when you are tempted, He will also provide an escape, so that you can stand up under it.',
       reference: '1 Corinthians 10:13',
     ),
     Verse(
-      text: 'How can a young person stay on the path of purity? By living according to your word.',
+      text: 'How can a young man keep his way pure? By guarding it according to Your word.',
       reference: 'Psalm 119:9',
     ),
     Verse(
-      text: 'Create in me a pure heart, O God, and renew a steadfast spirit within me.',
+      text: 'Create in me a clean heart, O God, and renew a right spirit within me.',
       reference: 'Psalm 51:10',
     ),
   ],
   RescueCategory.anxiety: [
     Verse(
-      text: 'Cast all your anxiety on him because he cares for you.',
+      text: 'Cast all your anxiety on Him, because He cares for you.',
       reference: '1 Peter 5:7',
     ),
     Verse(
-      text: 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.',
+      text: 'Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God.',
       reference: 'Philippians 4:6',
     ),
     Verse(
-      text: 'Peace I leave with you; my peace I give you. Do not let your hearts be troubled and do not be afraid.',
+      text: 'Peace I leave with you; My peace I give to you. I do not give to you as the world gives. Do not let your hearts be troubled; do not be afraid.',
       reference: 'John 14:27',
     ),
   ],
@@ -58,17 +58,17 @@ const Map<RescueCategory, List<Verse>> rescueVerses = {
       reference: 'Proverbs 15:1',
     ),
     Verse(
-      text: 'Everyone should be quick to listen, slow to speak and slow to become angry.',
+      text: 'Everyone should be quick to listen, slow to speak, and slow to anger.',
       reference: 'James 1:19',
     ),
     Verse(
-      text: 'In your anger do not sin: do not let the sun go down while you are still angry.',
+      text: '‘Be angry, yet do not sin.’ Do not let the sun set upon your anger.',
       reference: 'Ephesians 4:26',
     ),
   ],
   RescueCategory.addiction: [
     Verse(
-      text: 'It is for freedom that Christ has set us free. Stand firm, then, and do not let yourselves be burdened again by a yoke of slavery.',
+      text: 'It is for freedom that Christ has set us free. Stand firm, then, and do not be encumbered once more by a yoke of slavery.',
       reference: 'Galatians 5:1',
     ),
     Verse(
@@ -76,41 +76,41 @@ const Map<RescueCategory, List<Verse>> rescueVerses = {
       reference: 'John 8:36',
     ),
     Verse(
-      text: 'I can do all this through him who gives me strength.',
+      text: 'I can do all things through Christ who gives me strength.',
       reference: 'Philippians 4:13',
     ),
   ],
   RescueCategory.fear: [
     Verse(
-      text: 'For God has not given us a spirit of fear, but of power and of love and of a sound mind.',
+      text: 'For God has not given us a spirit of fear, but of power, love, and self-control.',
       reference: '2 Timothy 1:7',
     ),
     Verse(
-      text: 'When I am afraid, I put my trust in you.',
+      text: 'When I am afraid, I put my trust in You.',
       reference: 'Psalm 56:3',
     ),
     Verse(
-      text: 'So do not fear, for I am with you; do not be dismayed, for I am your God.',
+      text: 'Do not fear, for I am with you; do not be afraid, for I am your God.',
       reference: 'Isaiah 41:10',
     ),
   ],
   RescueCategory.loneliness: [
     Verse(
-      text: 'The Lord is close to the brokenhearted and saves those who are crushed in spirit.',
+      text: 'The LORD is near to the brokenhearted; He saves the contrite in spirit.',
       reference: 'Psalm 34:18',
     ),
     Verse(
-      text: 'Never will I leave you; never will I forsake you.',
+      text: 'Never will I leave you, never will I forsake you.',
       reference: 'Hebrews 13:5',
     ),
     Verse(
-      text: 'God sets the lonely in families.',
+      text: 'God settles the lonely in families.',
       reference: 'Psalm 68:6',
     ),
   ],
   RescueCategory.jealousy: [
     Verse(
-      text: 'A heart at peace gives life to the body, but envy rots the bones.',
+      text: 'A tranquil heart is life to the body, but envy rots the bones.',
       reference: 'Proverbs 14:30',
     ),
     Verse(
@@ -118,7 +118,7 @@ const Map<RescueCategory, List<Verse>> rescueVerses = {
       reference: '1 Corinthians 13:4',
     ),
     Verse(
-      text: 'But godliness with contentment is great gain.',
+      text: 'Of course, godliness with contentment is great gain.',
       reference: '1 Timothy 6:6',
     ),
   ],
@@ -128,11 +128,11 @@ const Map<RescueCategory, List<Verse>> rescueVerses = {
       reference: 'Colossians 3:2',
     ),
     Verse(
-      text: 'Be very careful, then, how you live — not as unwise but as wise, making the most of every opportunity.',
+      text: 'Pay careful attention, then, to how you walk, not as unwise but as wise, redeeming the time, because the days are evil.',
       reference: 'Ephesians 5:15-16',
     ),
     Verse(
-      text: 'Teach us to number our days, that we may gain a heart of wisdom.',
+      text: 'So teach us to number our days, that we may present a heart of wisdom.',
       reference: 'Psalm 90:12',
     ),
   ],
@@ -142,25 +142,25 @@ const Map<RescueCategory, List<Verse>> rescueVerses = {
       reference: '2 Corinthians 10:5',
     ),
     Verse(
-      text: 'Whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely — think about such things.',
+      text: 'Finally, brothers, whatever is true, whatever is honorable, whatever is right, whatever is pure, whatever is lovely, whatever is admirable—if anything is excellent or praiseworthy—think on these things.',
       reference: 'Philippians 4:8',
     ),
     Verse(
-      text: 'You will keep in perfect peace those whose minds are steadfast, because they trust in you.',
+      text: 'You will keep in perfect peace the steadfast of mind, because he trusts in You.',
       reference: 'Isaiah 26:3',
     ),
   ],
   RescueCategory.other: [
     Verse(
-      text: 'The Lord is my strength and my shield; my heart trusts in him, and he helps me.',
+      text: 'The LORD is my strength and my shield; my heart trusts in Him, and I am helped.',
       reference: 'Psalm 28:7',
     ),
     Verse(
-      text: 'God is our refuge and strength, an ever-present help in trouble.',
+      text: 'God is our refuge and strength, an ever-present help in times of trouble.',
       reference: 'Psalm 46:1',
     ),
     Verse(
-      text: 'Come to me, all you who are weary and burdened, and I will give you rest.',
+      text: 'Come to Me, all you who are weary and burdened, and I will give you rest.',
       reference: 'Matthew 11:28',
     ),
   ],
@@ -270,7 +270,7 @@ const rescueActions = [
 
 /// Forgiveness content for the Recovery flow.
 const recoveryVerse = Verse(
-  text: 'If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.',
+  text: 'If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.',
   reference: '1 John 1:9',
 );
 
