@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../shared/models/focus_session.dart';
+import '../../../shared/models/journal_entry.dart';
 import '../../../shared/providers/app_providers.dart';
+import '../../../shared/providers/journal_providers.dart';
 import '../../../shared/widgets/buttons.dart';
 import '../../../shared/widgets/premium_card.dart';
 import '../../../shared/widgets/progress_ring.dart';
@@ -97,16 +99,23 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
     if (_saving) return;
     setState(() => _saving = true);
     final elapsed = _totalSeconds - _remainingSeconds;
+    final reflection = _reflectionController.text.trim();
     await ref.read(focusSessionsProvider.notifier).add(FocusSession(
           id: '${DateTime.now().microsecondsSinceEpoch}',
           mode: widget.config.mode,
           duration: Duration(seconds: _completedFully ? _totalSeconds : elapsed),
           completedAt: DateTime.now(),
-          reflection: _reflectionController.text.trim().isEmpty
-              ? null
-              : _reflectionController.text.trim(),
+          reflection: reflection.isEmpty ? null : reflection,
           completed: _completedFully,
         ));
+    // The Journal is where users look for what they have written.
+    if (reflection.isNotEmpty) {
+      await ref.read(journalEntriesProvider.notifier).add(
+            type: JournalEntryType.reflection,
+            title: '${widget.config.mode.label} reflection',
+            content: reflection,
+          );
+    }
     if (mounted) context.go('/home');
   }
 
@@ -281,7 +290,7 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
           const SizedBox(height: 10),
           Text(
             _completedFully
-                ? 'You stayed present for ${widget.config.duration.inMinutes} minutes of ${widget.config.mode.label.toLowerCase()}.'
+                ? 'You stayed present for ${widget.config.duration.inMinutes} ${widget.config.duration.inMinutes == 1 ? 'minute' : 'minutes'} of ${widget.config.mode.label.toLowerCase()}.'
                 : 'You gave God this time, and that matters. Begin again any time.',
             style: theme.textTheme.bodyLarge
                 ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
@@ -300,6 +309,15 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
             textCapitalization: TextCapitalization.sentences,
             decoration: const InputDecoration(
               hintText: 'A word, a feeling, something He showed you… (optional)',
+            ),
+          ),
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Anything you write is saved privately to your Journal.',
+              style: theme.textTheme.bodySmall
+                  ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
           ),
           const SizedBox(height: 24),

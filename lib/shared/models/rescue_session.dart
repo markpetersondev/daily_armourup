@@ -2,7 +2,10 @@
 enum RescueOutcome {
   feltStronger('Yes, I feel stronger'),
   stillNeedHelp('I still need help'),
-  slipped('I slipped, help me restart');
+  slipped('I slipped, help me restart'),
+
+  /// Left before the check-in. Reaching for help still counts (PRD 7.3).
+  leftEarly('Left early');
 
   const RescueOutcome(this.label);
   final String label;

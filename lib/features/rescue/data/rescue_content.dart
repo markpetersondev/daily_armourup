@@ -242,14 +242,19 @@ const Map<RescueCategory, List<String>> rescuePrayers = {
 };
 
 /// Practical next-step actions offered in Step 4 of the Rescue flow.
+/// What choosing a Rescue action does, beyond recording the choice.
+enum RescueActionEffect { none, message, focus, verse, journal }
+
 class RescueAction {
-  const RescueAction({required this.label, required this.icon, this.route});
+  const RescueAction({
+    required this.label,
+    required this.icon,
+    this.effect = RescueActionEffect.none,
+  });
 
   final String label;
   final IconData icon;
-
-  /// Optional in-app route this action opens after completing the flow.
-  final String? route;
+  final RescueActionEffect effect;
 }
 
 const rescueActions = [
@@ -257,10 +262,10 @@ const rescueActions = [
   RescueAction(label: 'Put your phone down for 10 minutes', icon: Icons.phonelink_erase_outlined),
   RescueAction(label: 'Drink water', icon: Icons.water_drop_outlined),
   RescueAction(label: 'Go for a short walk', icon: Icons.park_outlined),
-  RescueAction(label: 'Message an accountability partner', icon: Icons.chat_bubble_outline),
-  RescueAction(label: 'Start a focus session', icon: Icons.self_improvement_outlined, route: '/focus'),
-  RescueAction(label: 'Read another verse', icon: Icons.menu_book_outlined, route: '/scripture'),
-  RescueAction(label: 'Write in journal', icon: Icons.edit_note_outlined, route: '/journal'),
+  RescueAction(label: 'Message an accountability partner', icon: Icons.chat_bubble_outline, effect: RescueActionEffect.message),
+  RescueAction(label: 'Start a focus session', icon: Icons.self_improvement_outlined, effect: RescueActionEffect.focus),
+  RescueAction(label: 'Read another verse', icon: Icons.menu_book_outlined, effect: RescueActionEffect.verse),
+  RescueAction(label: 'Write in journal', icon: Icons.edit_note_outlined, effect: RescueActionEffect.journal),
 ];
 
 /// Forgiveness content for the Recovery flow.

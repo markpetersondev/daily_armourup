@@ -170,7 +170,7 @@ class _FocusScreenState extends State<FocusScreen> {
                 ),
                 const SizedBox(height: 28),
                 PrimaryButton(
-                  label: 'Begin ${_duration.inMinutes} minutes of ${_mode.label.toLowerCase()}',
+                  label: 'Begin ${_duration.inMinutes} ${_duration.inMinutes == 1 ? 'minute' : 'minutes'} of ${_mode.label.toLowerCase()}',
                   icon: Icons.self_improvement_outlined,
                   onPressed: () => context.push(
                     '/focus/session',

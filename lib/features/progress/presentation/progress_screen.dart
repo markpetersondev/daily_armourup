@@ -89,7 +89,7 @@ class ProgressScreen extends ConsumerWidget {
                       scriptureStreak == 1 ? 'day' : 'days',
                       'Scripture streak'),
                   _StatItem(Icons.shield_outlined, '$rescues',
-                      'completed', 'Rescue sessions'),
+                      rescues == 1 ? 'time' : 'times', 'Reached for help'),
                   _StatItem(Icons.verified_user_outlined, '$resisted',
                       'stood firm', 'Temptations resisted'),
                   _StatItem(Icons.edit_note_outlined, '$journalThisMonth',

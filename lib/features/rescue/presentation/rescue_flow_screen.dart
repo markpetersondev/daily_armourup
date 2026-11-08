@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
+import '../../../shared/models/journal_entry.dart';
 import '../../../shared/models/rescue_session.dart';
 import '../../../shared/providers/app_providers.dart';
 import '../../../shared/widgets/buttons.dart';
@@ -43,6 +44,9 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
   int _verseIndex = 0;
   String? _selectedAction;
 
+  /// True once this attempt is recorded, so it is never counted twice.
+  bool _sessionSaved = false;
+
   List get _verses => rescueVerses[widget.category]!;
 
   @override
@@ -64,6 +68,8 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
   }
 
   Future<void> _saveSession(RescueOutcome outcome) async {
+    if (_sessionSaved) return;
+    _sessionSaved = true;
     await ref.read(rescueSessionsProvider.notifier).add(RescueSession(
           id: '${DateTime.now().microsecondsSinceEpoch}',
           category: widget.category.name,
@@ -84,12 +90,16 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
         setState(() => _phase = _FlowPhase.needHelp);
       case RescueOutcome.slipped:
         // The Recovery flow saves the session with its optional notes.
+        _sessionSaved = true;
         if (mounted) {
           context.pushReplacement('/rescue/recovery', extra: {
             'category': widget.category,
             'selectedAction': _selectedAction,
           });
         }
+      case RescueOutcome.leftEarly:
+        // Never chosen at the check-in; recorded when the user leaves.
+        break;
     }
   }
 
@@ -106,54 +116,81 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
         _breathingDone = false;
         _verseIndex = 0;
         _selectedAction = null;
+        _sessionSaved = false;
       }
     });
   }
 
+  Future<void> _onActionTap(RescueAction action) async {
+    setState(() => _selectedAction = action.label);
+    switch (action.effect) {
+      case RescueActionEffect.none:
+        break;
+      case RescueActionEffect.message:
+        await _showAccountabilitySheet(context);
+      case RescueActionEffect.verse:
+        setState(() => _verseIndex = (_verseIndex + 1) % _verses.length);
+        _goTo(1);
+      case RescueActionEffect.journal:
+        await context.push('/journal/new',
+            extra: JournalEntryType.personalNote);
+      case RescueActionEffect.focus:
+        // Finishing Focus returns Home, so this attempt ends here.
+        await _saveSession(RescueOutcome.leftEarly);
+        if (mounted) context.pushReplacement('/focus');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 640),
-            child: switch (_phase) {
-              _FlowPhase.success => _SuccessView(
-                  onDone: () => context.go('/home'),
-                  onBackToRescue: () => context.go('/rescue'),
-                ),
-              _FlowPhase.needHelp => _NeedHelpView(
-                  onReadVerse: () {
-                    _verseIndex = (_verseIndex + 1) % _verses.length;
-                    _reenterStepsAt(1);
-                  },
-                  onRestart: () => _reenterStepsAt(0, reset: true),
-                ),
-              _FlowPhase.steps => Column(
-                  children: [
-                    RescueProgressHeader(
-                      step: _step,
-                      totalSteps: _stepLabels.length,
-                      stepLabel: _stepLabels[_step],
-                      onClose: () => context.pop(),
-                    ),
-                    Expanded(
-                      child: PageView(
-                        controller: _pageController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        onPageChanged: (p) => setState(() => _step = p),
-                        children: [
-                          _buildBreatheStep(),
-                          _buildScriptureStep(),
-                          _buildPrayerStep(),
-                          _buildActionStep(),
-                          _buildCheckInStep(),
-                        ],
+    return PopScope(
+      // Covers the close button and the system back gesture.
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) _saveSession(RescueOutcome.leftEarly);
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 640),
+              child: switch (_phase) {
+                _FlowPhase.success => _SuccessView(
+                    onDone: () => context.go('/home'),
+                    onBackToRescue: () => context.go('/rescue'),
+                  ),
+                _FlowPhase.needHelp => _NeedHelpView(
+                    onReadVerse: () {
+                      _verseIndex = (_verseIndex + 1) % _verses.length;
+                      _reenterStepsAt(1);
+                    },
+                    onRestart: () => _reenterStepsAt(0, reset: true),
+                  ),
+                _FlowPhase.steps => Column(
+                    children: [
+                      RescueProgressHeader(
+                        step: _step,
+                        totalSteps: _stepLabels.length,
+                        stepLabel: _stepLabels[_step],
+                        onClose: () => context.pop(),
                       ),
-                    ),
-                  ],
-                ),
-            },
+                      Expanded(
+                        child: PageView(
+                          controller: _pageController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          onPageChanged: (p) => setState(() => _step = p),
+                          children: [
+                            _buildBreatheStep(),
+                            _buildScriptureStep(),
+                            _buildPrayerStep(),
+                            _buildActionStep(),
+                            _buildCheckInStep(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+              },
+            ),
           ),
         ),
       ),
@@ -325,8 +362,7 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
               child: _ActionCard(
                 action: action,
                 selected: _selectedAction == action.label,
-                onTap: () =>
-                    setState(() => _selectedAction = action.label),
+                onTap: () => _onActionTap(action),
               ),
             ),
         ],
@@ -551,63 +587,63 @@ class _SuccessView extends StatelessWidget {
   }
 }
 
+Future<void> _showAccountabilitySheet(BuildContext context) async {
+  const message =
+      'Hey — I\'m in a hard moment and choosing to reach out instead of '
+      'giving in. Could you pray for me right now?';
+  await showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    builder: (sheetContext) => Padding(
+      padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Reach out to someone you trust',
+              style: Theme.of(sheetContext).textTheme.headlineSmall),
+          const SizedBox(height: 10),
+          Text(
+            'A short message is enough. Copy this and send it to your '
+            'accountability partner in any app.',
+            style: Theme.of(sheetContext).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(sheetContext).colorScheme.onSurfaceVariant),
+          ),
+          const SizedBox(height: 16),
+          PremiumCard(
+            child: Text('“$message”',
+                style: Theme.of(sheetContext).textTheme.bodyLarge),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: () async {
+                await Clipboard.setData(
+                    const ClipboardData(text: message));
+                if (sheetContext.mounted) {
+                  Navigator.of(sheetContext).pop();
+                }
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Message copied. You are not alone.')));
+                }
+              },
+              icon: const Icon(Icons.copy_outlined, size: 18),
+              label: const Text('Copy message'),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 class _NeedHelpView extends StatelessWidget {
   const _NeedHelpView({required this.onReadVerse, required this.onRestart});
 
   final VoidCallback onReadVerse;
   final VoidCallback onRestart;
-
-  Future<void> _showAccountabilitySheet(BuildContext context) async {
-    const message =
-        'Hey — I\'m in a hard moment and choosing to reach out instead of '
-        'giving in. Could you pray for me right now?';
-    await showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (sheetContext) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Reach out to someone you trust',
-                style: Theme.of(sheetContext).textTheme.headlineSmall),
-            const SizedBox(height: 10),
-            Text(
-              'A short message is enough. Copy this and send it to your '
-              'accountability partner in any app.',
-              style: Theme.of(sheetContext).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(sheetContext).colorScheme.onSurfaceVariant),
-            ),
-            const SizedBox(height: 16),
-            PremiumCard(
-              child: Text('“$message”',
-                  style: Theme.of(sheetContext).textTheme.bodyLarge),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: () async {
-                  await Clipboard.setData(
-                      const ClipboardData(text: message));
-                  if (sheetContext.mounted) {
-                    Navigator.of(sheetContext).pop();
-                  }
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Message copied. You are not alone.')));
-                  }
-                },
-                icon: const Icon(Icons.copy_outlined, size: 18),
-                label: const Text('Copy message'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -622,7 +658,8 @@ class _NeedHelpView extends StatelessWidget {
       (
         Icons.wb_twilight_outlined,
         'Write a prayer',
-        () => context.pushReplacement('/prayers'),
+        () => context.pushReplacement('/journal/new',
+            extra: JournalEntryType.prayer),
       ),
       (
         Icons.chat_bubble_outline,
