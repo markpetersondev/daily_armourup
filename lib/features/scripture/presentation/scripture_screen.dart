@@ -105,10 +105,10 @@ class _ScriptureScreenState extends ConsumerState<ScriptureScreen>
           ),
         ),
         const SizedBox(height: 14),
-        SizedBox(
-          height: 44,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
+        // Sized by its content, so chips aren't clipped at large text sizes.
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8),

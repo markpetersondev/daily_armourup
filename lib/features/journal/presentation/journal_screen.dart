@@ -223,11 +223,11 @@ class _EntriesView extends StatelessWidget {
     }
     return Column(
       children: [
-        SizedBox(
-          height: 56,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
+        // Sized by its content, so chips aren't clipped at large text sizes.
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
+          child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8),

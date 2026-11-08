@@ -58,16 +58,20 @@ class AppBottomNavigation extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: SizedBox(
-          height: 72,
-          child: Row(
-            children: [
-              _navItem(context, 0),
-              _navItem(context, 1),
-              _rescueItem(context),
-              _navItem(context, 3),
-              _navItem(context, 4),
-            ],
+        // The bar has a fixed height, so labels can only grow so far.
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.3,
+          child: SizedBox(
+            height: 72,
+            child: Row(
+              children: [
+                _navItem(context, 0),
+                _navItem(context, 1),
+                _rescueItem(context),
+                _navItem(context, 3),
+                _navItem(context, 4),
+              ],
+            ),
           ),
         ),
       ),

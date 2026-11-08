@@ -481,57 +481,66 @@ class _QuickActions extends StatelessWidget {
       (Icons.spa_outlined, 'Track Practices', 'One step at a time', AppRoutes.disciplines),
       (Icons.insights_outlined, 'Your Rhythm', 'See your faithful steps', AppRoutes.progress),
     ];
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
-      childAspectRatio: 1.35,
+    Widget card((IconData, String, String, String) action) {
+      final (icon, label, subtitle, route) = action;
+      return Expanded(
+        child: PremiumCard(
+          padding: const EdgeInsets.all(16),
+          // Tab destinations switch branches; standalone flows push so
+          // the user can come back to Home.
+          onTap: () => route == AppRoutes.scripture ||
+                  route == AppRoutes.journal
+              ? context.go(route)
+              : context.push(route),
+          semanticLabel: label,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer
+                      .withValues(alpha: 0.6),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon,
+                    size: 21, color: Theme.of(context).colorScheme.primary),
+              ),
+              const SizedBox(height: 12),
+              // Pushes the text down so cards in a row line up.
+              const Spacer(),
+              Text(label, style: Theme.of(context).textTheme.titleSmall),
+              const SizedBox(height: 2),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Rows rather than a fixed-ratio grid, so cards grow with the text size.
+    return Column(
       children: [
-        for (final (icon, label, subtitle, route) in actions)
-          PremiumCard(
-            padding: const EdgeInsets.all(16),
-            // Tab destinations switch branches; standalone flows push so
-            // the user can come back to Home.
-            onTap: () => route == AppRoutes.scripture ||
-                    route == AppRoutes.journal
-                ? context.go(route)
-                : context.push(route),
-            semanticLabel: label,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        for (var i = 0; i < actions.length; i += 2) ...[
+          if (i > 0) const SizedBox(height: 12),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withValues(alpha: 0.6),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(icon,
-                      size: 21, color: Theme.of(context).colorScheme.primary),
-                ),
-                const Spacer(),
-                Text(label,
-                    style: Theme.of(context).textTheme.titleSmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 2),
-                Text(
-                  subtitle,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                card(actions[i]),
+                const SizedBox(width: 12),
+                card(actions[i + 1]),
               ],
             ),
           ),
+        ],
       ],
     );
   }
