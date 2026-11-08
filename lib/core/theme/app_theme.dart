@@ -15,8 +15,12 @@ abstract final class AppTheme {
     final base = GoogleFonts.interTextTheme();
     // Request the weight here, not via copyWith: google_fonts picks the font
     // file at creation time, so copyWith would keep the Regular file.
-    final serif =
-        GoogleFonts.playfairDisplay(color: heading, fontWeight: FontWeight.w600);
+    // Lining figures: Playfair's default old-style numerals make 0 read as O.
+    final serif = GoogleFonts.playfairDisplay(
+      color: heading,
+      fontWeight: FontWeight.w600,
+      fontFeatures: const [FontFeature.liningFigures()],
+    );
     return base
         .apply(bodyColor: body, displayColor: heading)
         .copyWith(
