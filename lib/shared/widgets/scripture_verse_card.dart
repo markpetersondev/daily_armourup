@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../providers/app_providers.dart';
+import '../utils/clipboard_feedback.dart';
 import 'premium_card.dart';
 
 /// A verse card with save, copy, note, and pray actions — used across the
@@ -98,14 +98,11 @@ class ScriptureVerseCard extends ConsumerWidget {
                 ),
               ),
               IconButton(
-                onPressed: () async {
-                  await Clipboard.setData(
-                      ClipboardData(text: '“$text” — $reference'));
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Verse copied.')));
-                  }
-                },
+                onPressed: () => copyWithConfirmation(
+                  context,
+                  text: '“$text” — $reference',
+                  message: 'Verse copied.',
+                ),
                 tooltip: 'Copy verse',
                 constraints:
                     const BoxConstraints(minWidth: 44, minHeight: 44),
