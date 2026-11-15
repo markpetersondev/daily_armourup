@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_colors.dart';
+import '../../../shared/models/journal_entry.dart';
 import '../../../shared/models/rescue_session.dart';
 import '../../../shared/providers/app_providers.dart';
+import '../../../shared/providers/journal_providers.dart';
 import '../../../shared/widgets/buttons.dart';
 import '../../../shared/widgets/guided_prayer_view.dart';
 import '../../../shared/widgets/premium_card.dart';
@@ -57,6 +59,14 @@ class _RecoveryScreenState extends ConsumerState<RecoveryScreen> {
           selectedAction: widget.selectedAction,
           note: noteParts.isEmpty ? null : noteParts.join('\n'),
         ));
+    // The Journal is where users look for what they have written.
+    if (noteParts.isNotEmpty) {
+      await ref.read(journalEntriesProvider.notifier).add(
+            type: JournalEntryType.temptationTrigger,
+            title: 'Recovery: ${widget.category.label}',
+            content: noteParts.join('\n\n'),
+          );
+    }
   }
 
   Future<void> _beginAgain() async {
@@ -162,7 +172,8 @@ class _RecoveryScreenState extends ConsumerState<RecoveryScreen> {
                       style: theme.textTheme.titleLarge),
                   const SizedBox(height: 6),
                   Text(
-                    'Both of these are optional and stay private on this device.',
+                    'Both of these are optional. What you write is saved to '
+                    'your Journal and stays private on this device.',
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),

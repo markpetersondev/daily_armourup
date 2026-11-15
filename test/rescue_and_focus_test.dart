@@ -75,7 +75,31 @@ void main() {
       final sessions = container.read(rescueSessionsProvider);
       expect(sessions, hasLength(1));
       expect(sessions.single.outcome, RescueOutcome.slipped);
+      expect(container.read(journalEntriesProvider), isEmpty);
     });
+  });
+
+  testWidgets('Recovery notes are saved to the Journal', (tester) async {
+    tester.view.physicalSize = const Size(1080, 6000);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    final container = await pumpScreen(
+        tester, const RecoveryScreen(category: RescueCategory.anger));
+
+    await tester.enterText(find.byType(TextField).first, 'Traffic');
+    await tester.enterText(find.byType(TextField).last, 'A long day');
+    await tester.ensureVisible(find.text('Begin Again'));
+    await tester.tap(find.text('Begin Again'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    final entries = container.read(journalEntriesProvider);
+    expect(entries, hasLength(1));
+    expect(entries.single.type, JournalEntryType.temptationTrigger);
+    expect(entries.single.title, 'Recovery: Anger');
+    expect(entries.single.content,
+        'Trigger: Traffic\n\nBefore this: A long day');
+    expect(container.read(rescueSessionsProvider), hasLength(1));
   });
 
   testWidgets('Focus reflection is saved to the Journal', (tester) async {
