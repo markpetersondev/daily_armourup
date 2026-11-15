@@ -47,11 +47,16 @@ class _ScriptureScreenState extends ConsumerState<ScriptureScreen>
 
   @override
   Widget build(BuildContext context) {
+    // At large text sizes the three labels no longer fit side by side, so let
+    // the tab bar scroll instead of cutting "Memory" off.
+    final largeText = MediaQuery.textScalerOf(context).scale(10) > 13;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scripture'),
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: largeText,
+          tabAlignment: largeText ? TabAlignment.start : null,
           tabs: const [
             Tab(text: 'Library'),
             Tab(text: 'Saved'),
