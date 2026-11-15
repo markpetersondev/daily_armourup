@@ -5,7 +5,9 @@ import 'package:intl/intl.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/router/app_router.dart';
+import '../../../shared/models/journal_entry.dart';
 import '../../../shared/models/mood_check_in.dart';
+import '../../journal/presentation/journal_entry_editor_screen.dart';
 import '../../../shared/models/user_profile.dart';
 import '../../../shared/providers/app_providers.dart';
 import '../../../shared/providers/habit_providers.dart';
@@ -47,7 +49,13 @@ class HomeScreen extends ConsumerWidget {
                       text: verse.text,
                       reference: verse.reference,
                       category: 'Daily Verse'),
-                  onReflect: () => context.go(AppRoutes.journal),
+                  onReflect: () => context.push(
+                    AppRoutes.journalNew,
+                    extra: NewJournalEntryArgs(
+                      type: JournalEntryType.reflection,
+                      verseReference: verse.reference,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 28),
                 const _CheckInCard(),

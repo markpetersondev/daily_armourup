@@ -116,11 +116,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.journalNew,
-        builder: (context, state) => JournalEntryEditorScreen(
-          initialType: state.extra is JournalEntryType
-              ? state.extra as JournalEntryType
-              : null,
-        ),
+        // extra: a JournalEntryType, or a NewJournalEntryArgs to also attach a verse.
+        builder: (context, state) {
+          final extra = state.extra;
+          return JournalEntryEditorScreen(
+            initialType: extra is JournalEntryType
+                ? extra
+                : extra is NewJournalEntryArgs
+                    ? extra.type
+                    : null,
+            initialVerseReference:
+                extra is NewJournalEntryArgs ? extra.verseReference : null,
+          );
+        },
       ),
       GoRoute(
         path: '/journal/edit/:id',

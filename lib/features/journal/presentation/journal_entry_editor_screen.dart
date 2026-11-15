@@ -11,12 +11,28 @@ import '../../../shared/widgets/buttons.dart';
 import '../../../shared/widgets/mood_selector.dart';
 import '../../../shared/widgets/section_header.dart';
 
+/// Route `extra` for a new entry that starts with a type and an attached verse.
+class NewJournalEntryArgs {
+  const NewJournalEntryArgs({required this.type, this.verseReference});
+
+  final JournalEntryType type;
+  final String? verseReference;
+}
+
 /// Create a new journal entry, or edit an existing one when [entryId] is set.
 class JournalEntryEditorScreen extends ConsumerStatefulWidget {
-  const JournalEntryEditorScreen({super.key, this.entryId, this.initialType});
+  const JournalEntryEditorScreen({
+    super.key,
+    this.entryId,
+    this.initialType,
+    this.initialVerseReference,
+  });
 
   final String? entryId;
   final JournalEntryType? initialType;
+
+  /// Pre-fills the attached verse on a new entry, e.g. from Home's "Reflect".
+  final String? initialVerseReference;
 
   @override
   ConsumerState<JournalEntryEditorScreen> createState() =>
@@ -46,7 +62,8 @@ class _JournalEntryEditorScreenState
     _titleController = TextEditingController(text: _existing?.title ?? '');
     _contentController = TextEditingController(text: _existing?.content ?? '');
     _verseController =
-        TextEditingController(text: _existing?.verseReference ?? '');
+        TextEditingController(
+            text: _existing?.verseReference ?? widget.initialVerseReference ?? '');
   }
 
   @override
