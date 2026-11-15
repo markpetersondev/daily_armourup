@@ -18,6 +18,9 @@ Future<void> main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
   _registerFontLicenses();
 
+  // Layouts are designed for portrait; iOS is already locked in Info.plist.
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   final storage = await LocalStorageService.init();
   runApp(
     ProviderScope(
