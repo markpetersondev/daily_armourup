@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/dates.dart';
 import 'user_profile.dart';
 
 /// Icon names persisted with habits, resolved to Material icons.
@@ -60,13 +61,14 @@ class SpiritualHabit {
   bool get isCompletedToday => isCompletedOn(DateTime.now());
 
   /// Completions per target this week (Monday-start).
-  int get completionsThisWeek {
-    final now = DateTime.now();
-    final monday = DateTime(now.year, now.month, now.day)
-        .subtract(Duration(days: now.weekday - 1));
+  int get completionsThisWeek => completionsInWeekOf(DateTime.now());
+
+  /// Completions in the Monday-start week that contains [day].
+  int completionsInWeekOf(DateTime day) {
+    final monday = startOfWeek(day);
     var count = 0;
     for (var i = 0; i < 7; i++) {
-      if (isCompletedOn(monday.add(Duration(days: i)))) count++;
+      if (isCompletedOn(addDays(monday, i))) count++;
     }
     return count;
   }
@@ -81,37 +83,30 @@ class SpiritualHabit {
   /// Current streak. Daily habits count consecutive days (today may still
   /// be pending); other frequencies count consecutive weeks that met their
   /// target (this week counts once any progress is made).
-  int get currentStreak {
+  int get currentStreak => streakOn(DateTime.now());
+
+  /// The streak as it stands on [today]. See [currentStreak].
+  int streakOn(DateTime today) {
     if (completedDates.isEmpty) return 0;
-    final today = DateTime.now();
     if (frequency == GoalFrequency.daily) {
       var streak = 0;
-      var day = DateTime(today.year, today.month, today.day);
-      if (!isCompletedOn(day)) day = day.subtract(const Duration(days: 1));
+      var day = dateOnly(today);
+      if (!isCompletedOn(day)) day = addDays(day, -1);
       while (isCompletedOn(day)) {
         streak++;
-        day = day.subtract(const Duration(days: 1));
+        day = addDays(day, -1);
       }
       return streak;
     }
     // Week-based streak.
-    var monday = DateTime(today.year, today.month, today.day)
-        .subtract(Duration(days: today.weekday - 1));
-    int completionsInWeek(DateTime weekStart) {
-      var count = 0;
-      for (var i = 0; i < 7; i++) {
-        if (isCompletedOn(weekStart.add(Duration(days: i)))) count++;
-      }
-      return count;
-    }
-
+    var monday = startOfWeek(today);
     var streak = 0;
     // The current, in-progress week counts as soon as it has any progress.
-    if (completionsInWeek(monday) > 0) streak++;
-    monday = monday.subtract(const Duration(days: 7));
-    while (completionsInWeek(monday) >= weeklyTarget) {
+    if (completionsInWeekOf(monday) > 0) streak++;
+    monday = addDays(monday, -7);
+    while (completionsInWeekOf(monday) >= weeklyTarget) {
       streak++;
-      monday = monday.subtract(const Duration(days: 7));
+      monday = addDays(monday, -7);
     }
     return streak;
   }

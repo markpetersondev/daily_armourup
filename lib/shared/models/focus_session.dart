@@ -1,3 +1,5 @@
+import '../../core/utils/dates.dart';
+
 /// The kinds of Sacred Focus sessions.
 enum FocusMode {
   prayer('Prayer'),
@@ -30,9 +32,7 @@ class FocusSession {
 
   bool get isThisWeek {
     final now = DateTime.now();
-    final startOfWeek = DateTime(now.year, now.month, now.day)
-        .subtract(Duration(days: now.weekday - 1));
-    return !completedAt.isBefore(startOfWeek);
+    return !completedAt.isBefore(startOfWeek(now));
   }
 
   Map<String, dynamic> toJson() => {
