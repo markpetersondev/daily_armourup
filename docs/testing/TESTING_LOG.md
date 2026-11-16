@@ -5,6 +5,23 @@ Keep [Open issues](#open-issues) and [Feature gaps](#feature-gaps) current.
 
 ## Test sessions
 
+### 16 Nov 2026: iOS-readiness features (help, FAQ, version, keyboard)
+
+**Result:** passed. `flutter test` runs 71 tests; `flutter analyze` reports no issues.
+Emulator: Pixel (API 34), debug build.
+
+| Change | Checked | Result |
+|---|---|---|
+| Profile → Help & support: Help & FAQ and Contact us | Emulator and test | Pass |
+| Help & FAQ: 11 questions, expand to read, works offline | Emulator and test | Pass |
+| Contact us opens an email to hustlebluprint@gmail.com with the version filled in; falls back to a Copy action without an email app | Emulator: Gmail opened (no account set up, so the draft itself wasn't seen) | Pass |
+| Version read from the build ("Version 1.0.0 (1)") | Emulator and test | Pass |
+| Keyboard closes when tapping outside a field or scrolling, on every screen | Emulator (`mInputShown` true → false) and tests | Pass |
+| Help screen meets the accessibility guidelines | Test | Pass, after replacing the selectable email text (21dp tall) with plain text |
+
+The app-wide tap-to-close area is hidden from screen readers; without that, every screen
+failed the label check. Not yet checked on an iPhone.
+
 ### 16 Nov 2026: accessibility pass and deprecation fix
 
 **Result:** passed after fixes. `test/accessibility_test.dart` runs Flutter's label, 48dp
