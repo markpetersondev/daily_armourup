@@ -215,7 +215,7 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
                   const SizedBox(height: 8),
                   Text('— ${content.verse.reference}',
                       style: theme.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.warmGold)),
+                          ?.copyWith(color: AppColors.goldText(context))),
                 ],
               ),
             ),

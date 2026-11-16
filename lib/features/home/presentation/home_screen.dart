@@ -179,8 +179,11 @@ class _CheckInCard extends ConsumerWidget {
               const Icon(Icons.favorite_outline,
                   color: AppColors.gentleRed, size: 20),
               const SizedBox(width: 10),
-              Text('How is your heart today?',
-                  style: theme.textTheme.titleLarge),
+              // Flexible so the heading wraps at large text sizes.
+              Flexible(
+                child: Text('How is your heart today?',
+                    style: theme.textTheme.titleLarge),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -640,7 +643,7 @@ class _UpcomingReminder extends StatelessWidget {
               Text(
                 DateFormat.jm().format(time),
                 style: theme.textTheme.titleSmall
-                    ?.copyWith(color: AppColors.warmGold),
+                    ?.copyWith(color: AppColors.goldText(context)),
               ),
             ],
           ),

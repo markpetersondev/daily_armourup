@@ -161,7 +161,7 @@ class _MemoryQuizScreenState extends ConsumerState<MemoryQuizScreen> {
                   alignment: Alignment.centerRight,
                   child: Text('— ${widget.verse.reference}',
                       style: theme.textTheme.titleSmall
-                          ?.copyWith(color: AppColors.warmGold)),
+                          ?.copyWith(color: AppColors.goldText(context))),
                 ),
                 const SizedBox(height: 20),
                 for (var i = 0; i < hidden.length; i++)

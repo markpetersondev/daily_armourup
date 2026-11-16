@@ -291,7 +291,7 @@ class _RescueFlowScreenState extends ConsumerState<RescueFlowScreen> {
                   const SizedBox(height: 14),
                   Text('— ${verse.reference}',
                       style: theme.textTheme.titleSmall
-                          ?.copyWith(color: AppColors.warmGold)),
+                          ?.copyWith(color: AppColors.goldText(context))),
                   const SizedBox(height: 10),
                   TextButton.icon(
                     onPressed: () =>

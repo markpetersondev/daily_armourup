@@ -84,7 +84,7 @@ class _PrayerDetailScreenState extends ConsumerState<PrayerDetailScreen> {
                       const SizedBox(height: 10),
                       Text('— ${prayer.verse.reference}',
                           style: theme.textTheme.titleSmall
-                              ?.copyWith(color: AppColors.warmGold)),
+                              ?.copyWith(color: AppColors.goldText(context))),
                     ],
                   ),
                 ),

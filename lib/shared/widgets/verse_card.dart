@@ -118,7 +118,7 @@ class VerseCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                             onTap: onReflect,
                             child: Container(
-                              constraints: const BoxConstraints(minHeight: 44),
+                              constraints: const BoxConstraints(minHeight: 48),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 18, vertical: 10),
                               child: Row(
@@ -176,7 +176,7 @@ class _VerseAction extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           onTap: onTap,
           child: Container(
-            constraints: const BoxConstraints(minHeight: 44),
+            constraints: const BoxConstraints(minHeight: 48),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             child: Row(
               mainAxisSize: MainAxisSize.min,

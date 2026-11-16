@@ -127,7 +127,7 @@ class _ArmourTile extends StatelessWidget {
                     Text(
                       piece.verseReference,
                       style: theme.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.warmGold),
+                          ?.copyWith(color: AppColors.goldText(context)),
                     ),
                   ],
                 ),
@@ -192,7 +192,7 @@ class _ArmourTile extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(piece.verseReference,
                         style: theme.textTheme.bodySmall
-                            ?.copyWith(color: AppColors.warmGold)),
+                            ?.copyWith(color: AppColors.goldText(context))),
                   ],
                 ),
               ),

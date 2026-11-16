@@ -35,7 +35,7 @@ class MoodSelector extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 onTap: () => onSelected(mood),
                 child: Container(
-                  constraints: const BoxConstraints(minHeight: 44),
+                  constraints: const BoxConstraints(minHeight: 48),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(

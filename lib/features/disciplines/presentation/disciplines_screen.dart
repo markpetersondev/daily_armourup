@@ -253,7 +253,7 @@ class _HabitCard extends ConsumerWidget {
                             ? '$streak-day streak'
                             : '$streak-week streak',
                         style: theme.textTheme.bodySmall
-                            ?.copyWith(color: AppColors.warmGold),
+                            ?.copyWith(color: AppColors.goldText(context)),
                       ),
                       const SizedBox(width: 10),
                     ],
@@ -286,8 +286,8 @@ class _HabitCard extends ConsumerWidget {
                     .read(spiritualHabitsProvider.notifier)
                     .toggleCompleted(habit.id),
                 child: Container(
-                  width: 46,
-                  height: 46,
+                  width: 48,
+                  height: 48,
                   alignment: Alignment.center,
                   child: Icon(
                     done ? Icons.check : Icons.circle_outlined,

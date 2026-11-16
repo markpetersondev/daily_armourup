@@ -157,7 +157,7 @@ class _RecoveryScreenState extends ConsumerState<RecoveryScreen> {
                         const SizedBox(height: 12),
                         Text('— ${recoveryVerse.reference}',
                             style: theme.textTheme.titleSmall
-                                ?.copyWith(color: AppColors.warmGold)),
+                                ?.copyWith(color: AppColors.goldText(context))),
                       ],
                     ),
                   ),

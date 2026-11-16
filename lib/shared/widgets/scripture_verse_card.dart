@@ -79,7 +79,7 @@ class ScriptureVerseCard extends ConsumerWidget {
           Text(
             '— $reference',
             style: theme.textTheme.titleSmall
-                ?.copyWith(color: AppColors.warmGold),
+                ?.copyWith(color: AppColors.goldText(context)),
           ),
           const SizedBox(height: 6),
           Row(

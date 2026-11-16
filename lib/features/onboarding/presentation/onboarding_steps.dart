@@ -91,7 +91,7 @@ class WelcomeStep extends StatelessWidget {
           Text(
             AppStrings.tagline,
             style: theme.textTheme.titleMedium
-                ?.copyWith(color: AppColors.warmGold, letterSpacing: 0.5),
+                ?.copyWith(color: AppColors.goldText(context), letterSpacing: 0.5),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 28),
@@ -572,7 +572,7 @@ class ReadyStep extends StatelessWidget {
           Text(
             '— Ephesians 6:11',
             style: theme.textTheme.titleMedium
-                ?.copyWith(color: AppColors.warmGold),
+                ?.copyWith(color: AppColors.goldText(context)),
           ),
           const SizedBox(height: 32),
           Text(

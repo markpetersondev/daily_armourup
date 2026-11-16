@@ -412,7 +412,7 @@ class _TimelineTile extends StatelessWidget {
                     Text(
                       DateFormat.yMMMd().format(entry.date),
                       style: theme.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.warmGold),
+                          ?.copyWith(color: AppColors.goldText(context)),
                     ),
                     const SizedBox(height: 4),
                     Text(
