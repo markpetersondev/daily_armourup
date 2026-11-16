@@ -21,6 +21,7 @@ import '../../features/rescue/presentation/rescue_flow_screen.dart';
 import '../../features/rescue/presentation/rescue_screen.dart';
 import '../../features/scripture/presentation/memory_quiz_screen.dart';
 import '../../features/scripture/presentation/scripture_screen.dart';
+import '../../features/support/presentation/help_screen.dart';
 import '../../shared/models/focus_session.dart';
 import '../../shared/models/journal_entry.dart';
 import '../../shared/models/saved_verse.dart';
@@ -46,6 +47,7 @@ abstract final class AppRoutes {
   static const progress = '/progress';
   static const profileEdit = '/profile/edit';
   static const armour = '/profile/armour';
+  static const help = '/profile/help';
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -157,6 +159,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.armour,
         builder: (context, state) => const ArmourScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.help,
+        builder: (context, state) => const HelpScreen(),
       ),
       GoRoute(
         path: AppRoutes.memoryQuiz,

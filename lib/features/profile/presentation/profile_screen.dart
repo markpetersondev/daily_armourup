@@ -6,11 +6,13 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/router/app_router.dart';
+import '../../../shared/providers/app_info_provider.dart';
 import '../../../shared/providers/app_providers.dart';
 import '../../../shared/providers/habit_providers.dart';
 import '../../../shared/providers/journal_providers.dart';
 import '../../../shared/widgets/premium_card.dart';
 import '../../../shared/widgets/section_header.dart';
+import '../../support/contact_support.dart';
 
 /// Profile: identity, journey summaries, settings, My Armour, and reset.
 class ProfileScreen extends ConsumerWidget {
@@ -23,6 +25,7 @@ class ProfileScreen extends ConsumerWidget {
     final savedVerses = ref.watch(savedVersesProvider);
     final journalCount = ref.watch(journalEntriesProvider).length;
     final enabledHabits = ref.watch(enabledHabitsProvider);
+    final version = ref.watch(appInfoProvider).valueOrNull;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
@@ -212,6 +215,31 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 28),
 
+                // Help & support
+                const SectionHeader(title: 'Help & support'),
+                PremiumCard(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.help_outline),
+                        title: const Text('Help & FAQ'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => context.push(AppRoutes.help),
+                      ),
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.mail_outline),
+                        title: const Text('Contact us'),
+                        subtitle: const Text(AppStrings.supportEmail),
+                        onTap: () => contactSupport(context, ref),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 28),
+
                 // About + summaries + reset
                 const SectionHeader(title: 'About'),
                 PremiumCard(
@@ -236,7 +264,9 @@ class ProfileScreen extends ConsumerWidget {
                       ListTile(
                         leading: const Icon(Icons.info_outline),
                         title: const Text(AppStrings.appName),
-                        subtitle: const Text('Version 1.0.0 · Stand firm. Pray first.'),
+                        subtitle: Text(version == null
+                            ? AppStrings.tagline
+                            : 'Version ${version.label} · ${AppStrings.tagline}'),
                       ),
                       const Divider(height: 1),
                       ListTile(
@@ -262,7 +292,7 @@ class ProfileScreen extends ConsumerWidget {
                         onTap: () => showLicensePage(
                           context: context,
                           applicationName: AppStrings.appName,
-                          applicationVersion: '1.0.0',
+                          applicationVersion: version?.label,
                         ),
                       ),
                     ],

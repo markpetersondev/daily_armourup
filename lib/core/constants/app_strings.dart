@@ -11,6 +11,9 @@ abstract final class AppStrings {
       'Your journey is private and saved securely on this device.';
   static const privacyPolicyUrl =
       'https://markpetersondev.github.io/armour-up-privacy/';
+  static const supportUrl =
+      'https://markpetersondev.github.io/armour-up-privacy/support.html';
+  static const supportEmail = 'hustlebluprint@gmail.com';
 
   static const scriptureCredit =
       'Scripture quotations are from the Berean Standard Bible (BSB), '

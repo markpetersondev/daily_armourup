@@ -82,6 +82,19 @@ class _ArmourAndPrayerAppState extends ConsumerState<ArmourAndPrayerApp> {
       darkTheme: AppTheme.dark,
       themeMode: themeMode,
       routerConfig: router,
+      // iPhone keyboards for multi-line fields have no "Done" key and there is
+      // no back button, so let users close the keyboard by scrolling...
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      ),
+      // ...or by tapping anywhere outside a text field.
+      builder: (context, child) => GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        // Not an action screen readers should announce.
+        excludeFromSemantics: true,
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: child,
+      ),
     );
   }
 }
