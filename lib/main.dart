@@ -45,11 +45,34 @@ void _registerFontLicenses() {
   });
 }
 
-class ArmourAndPrayerApp extends ConsumerWidget {
+class ArmourAndPrayerApp extends ConsumerStatefulWidget {
   const ArmourAndPrayerApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ArmourAndPrayerApp> createState() => _ArmourAndPrayerAppState();
+}
+
+class _ArmourAndPrayerAppState extends ConsumerState<ArmourAndPrayerApp> {
+  // The midnight timer may not fire while the app is suspended, so re-check
+  // the date whenever the app comes back to the foreground.
+  late final AppLifecycleListener _lifecycle = AppLifecycleListener(
+    onResume: () => ref.read(todayProvider.notifier).refresh(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _lifecycle; // Start listening.
+  }
+
+  @override
+  void dispose() {
+    _lifecycle.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(appRouterProvider);
     final themeMode = ref.watch(themeModeProvider);
     return MaterialApp.router(

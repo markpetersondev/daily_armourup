@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/storage/local_storage_service.dart';
+import '../../core/utils/dates.dart';
 import '../models/journal_entry.dart';
 import '../models/mood_check_in.dart';
 import 'app_providers.dart';
@@ -95,9 +96,8 @@ final answeredPrayersProvider = Provider<List<JournalEntry>>((ref) => ref
 
 /// Journal entries written since Monday of this week.
 final journalEntriesThisWeekProvider = Provider<int>((ref) {
-  final now = DateTime.now();
-  final monday = DateTime(now.year, now.month, now.day)
-      .subtract(Duration(days: now.weekday - 1));
+  final now = ref.watch(todayProvider);
+  final monday = startOfWeek(now);
   return ref
       .watch(journalEntriesProvider)
       .where((e) => !e.date.isBefore(monday))
@@ -106,7 +106,7 @@ final journalEntriesThisWeekProvider = Provider<int>((ref) {
 
 /// Journal entries written this calendar month.
 final journalEntriesThisMonthProvider = Provider<int>((ref) {
-  final now = DateTime.now();
+  final now = ref.watch(todayProvider);
   return ref
       .watch(journalEntriesProvider)
       .where((e) => e.date.year == now.year && e.date.month == now.month)

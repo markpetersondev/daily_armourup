@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/utils/dates.dart';
+
 import '../models/mood_check_in.dart';
 import '../models/spiritual_habit.dart';
 import 'app_providers.dart';
@@ -7,9 +9,8 @@ import 'habit_providers.dart';
 
 /// The mood the user has checked in with most often since Monday.
 final mostCommonMoodThisWeekProvider = Provider<Mood?>((ref) {
-  final now = DateTime.now();
-  final monday = DateTime(now.year, now.month, now.day)
-      .subtract(Duration(days: now.weekday - 1));
+  final now = ref.watch(todayProvider);
+  final monday = startOfWeek(now);
   final counts = <Mood, int>{};
   for (final c in ref.watch(moodCheckInsProvider)) {
     if (!c.date.isBefore(monday)) {
@@ -64,12 +65,11 @@ class DayCompletion {
 /// Habit completion for each of the last seven days (oldest first).
 final weekCompletionProvider = Provider<List<DayCompletion>>((ref) {
   final habits = ref.watch(enabledHabitsProvider);
-  final now = DateTime.now();
-  final today = DateTime(now.year, now.month, now.day);
+  final today = ref.watch(todayProvider);
   return [
     for (var i = 6; i >= 0; i--)
       () {
-        final day = today.subtract(Duration(days: i));
+        final day = addDays(today, -i);
         var completed = 0;
         for (final h in habits) {
           if (h.isCompletedOn(day)) completed++;

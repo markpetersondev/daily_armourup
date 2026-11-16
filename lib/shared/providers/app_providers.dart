@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/storage/local_storage_service.dart';
+import '../../core/utils/dates.dart';
 import '../models/discipline_stats.dart';
 import '../models/focus_session.dart';
 import '../models/mood_check_in.dart';
@@ -9,6 +12,38 @@ import '../models/rescue_session.dart';
 import '../models/saved_verse.dart';
 import '../models/user_profile.dart';
 import '../models/verse.dart';
+
+/// The current calendar day (midnight). Providers that depend on "today"
+/// watch this, so they recompute when the day changes instead of showing
+/// yesterday's verse, check-in and ticks until the app is restarted.
+/// Updated at midnight and when the app returns to the foreground.
+final todayProvider = NotifierProvider<TodayNotifier, DateTime>(TodayNotifier.new);
+
+class TodayNotifier extends Notifier<DateTime> {
+  Timer? _midnightTimer;
+
+  @override
+  DateTime build() {
+    ref.onDispose(() => _midnightTimer?.cancel());
+    _scheduleMidnight();
+    return dateOnly(DateTime.now());
+  }
+
+  /// Re-reads the clock; only notifies listeners if the day has changed.
+  void refresh() {
+    final today = dateOnly(DateTime.now());
+    if (today != state) state = today;
+    _scheduleMidnight();
+  }
+
+  void _scheduleMidnight() {
+    _midnightTimer?.cancel();
+    final now = DateTime.now();
+    final untilMidnight = addDays(now, 1).difference(now);
+    _midnightTimer =
+        Timer(untilMidnight + const Duration(seconds: 1), refresh);
+  }
+}
 
 /// Overridden in `main()` with the initialised instance.
 final localStorageProvider = Provider<LocalStorageService>(
@@ -82,6 +117,7 @@ class MoodCheckInsNotifier extends Notifier<List<MoodCheckIn>> {
 
 /// Today's check-in, if the user has already checked in.
 final todayCheckInProvider = Provider<MoodCheckIn?>((ref) {
+  ref.watch(todayProvider);
   final checkIns = ref.watch(moodCheckInsProvider);
   for (final c in checkIns.reversed) {
     if (c.isToday) return c;
@@ -115,9 +151,8 @@ class DisciplineStatsNotifier extends Notifier<DisciplineStats> {
 
 /// Today's verse from the local rotation (changes each calendar day).
 final dailyVerseProvider = Provider<Verse>((ref) {
-  final now = DateTime.now();
-  final dayOfYear = now.difference(DateTime(now.year)).inDays;
-  return dailyVerses[dayOfYear % dailyVerses.length];
+  final now = ref.watch(todayProvider);
+  return dailyVerses[dayOfYear(now) % dailyVerses.length];
 });
 
 /// Verses the user has saved, with notes and memory progress.
@@ -246,10 +281,13 @@ class FocusSessionsNotifier extends Notifier<List<FocusSession>> {
 }
 
 /// Focus sessions completed since Monday of this week.
-final focusSessionsThisWeekProvider = Provider<int>((ref) => ref
-    .watch(focusSessionsProvider)
-    .where((s) => s.completed && s.isThisWeek)
-    .length);
+final focusSessionsThisWeekProvider = Provider<int>((ref) {
+  ref.watch(todayProvider);
+  return ref
+      .watch(focusSessionsProvider)
+      .where((s) => s.completed && s.isThisWeek)
+      .length;
+});
 
 /// Ids of prayers the user has saved.
 final savedPrayersProvider =

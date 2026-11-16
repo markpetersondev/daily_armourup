@@ -175,12 +175,16 @@ class SpiritualHabitsNotifier extends Notifier<List<SpiritualHabit>> {
   }
 }
 
-/// Habits currently shown on the tracker.
-final enabledHabitsProvider = Provider<List<SpiritualHabit>>((ref) =>
-    ref.watch(spiritualHabitsProvider).where((h) => h.isEnabled).toList());
+/// Habits currently shown on the tracker. Also recomputes when the day
+/// changes, so screens showing today's ticks and streaks rebuild.
+final enabledHabitsProvider = Provider<List<SpiritualHabit>>((ref) {
+  ref.watch(todayProvider);
+  return ref.watch(spiritualHabitsProvider).where((h) => h.isEnabled).toList();
+});
 
 /// Longest daily streak across the prayer habits.
 final prayerStreakProvider = Provider<int>((ref) {
+  ref.watch(todayProvider);
   final habits = ref.watch(spiritualHabitsProvider);
   var streak = 0;
   for (final h in habits) {
@@ -194,6 +198,7 @@ final prayerStreakProvider = Provider<int>((ref) {
 
 /// Streak for scripture reading (Bible reading habit).
 final scriptureStreakProvider = Provider<int>((ref) {
+  ref.watch(todayProvider);
   final habits = ref.watch(spiritualHabitsProvider);
   for (final h in habits) {
     if (h.id == 'bible_reading') return h.currentStreak;
