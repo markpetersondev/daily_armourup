@@ -166,7 +166,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ),
                   ),
                 ],
-                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                // Hidden for the MVP release; see docs/ios/IOS_SETUP.md step 4.6.
                 // const SizedBox(height: 18),
                 // const SectionHeader(
                 //   title: 'Reminders',

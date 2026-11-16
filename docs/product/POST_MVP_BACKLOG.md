@@ -25,7 +25,7 @@ To see what a commit removed, run `git show <commit>`.
 `onboarding_screen.dart`, `home_screen.dart` and `edit_profile_screen.dart`. Saved
 preferences are still in the profile data.
 
-**To add it:** follow [IOS_SETUP.md](IOS_SETUP.md) step 4.6.
+**To add it:** follow [IOS_SETUP.md](../ios/IOS_SETUP.md) step 4.6.
 
 **Watch out for:**
 - `flutter_local_notifications` needs newer Android build tools than the project has
@@ -44,7 +44,7 @@ emergency services or someone they trust.
 **What exists:** `lib/features/rescue/widgets/crisis_support_note.dart` is finished.
 
 **To add it:** uncomment the marked lines in `rescue_screen.dart` and
-`recovery_screen.dart`. See [IOS_SETUP.md](IOS_SETUP.md) step 4.9.
+`recovery_screen.dart`. See [IOS_SETUP.md](../ios/IOS_SETUP.md) step 4.9.
 
 **Watch out for:** turn this on first if App Review raises it. Rescue covers anxiety,
 addiction and negative thoughts, so this is the first item to reconsider after launch.

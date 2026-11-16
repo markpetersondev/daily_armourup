@@ -5,6 +5,64 @@ Keep [Open issues](#open-issues) and [Feature gaps](#feature-gaps) current.
 
 ## Test sessions
 
+### 16 Nov 2026: accessibility pass and deprecation fix
+
+**Result:** passed after fixes. `test/accessibility_test.dart` runs Flutter's label, 48dp
+tap-target and WCAG contrast checks on all 19 screens; `flutter test` now runs 66 tests and
+`flutter analyze` reports no issues. TalkBack isn't installed on the emulator (no Play
+Store), so what TalkBack reads was checked through the Android accessibility tree instead.
+
+| Finding | Fix | Checked |
+|---|---|---|
+| Manage Practices switches and menus had no names ("Switch, on") | Labelled "Show <practice> in today's practices" and "Options for <practice>" | Emulator accessibility tree, test |
+| Secondary grey text 3.8:1 on cream (needs 4.5:1), on most screens | `mutedGray` darkened to `#626A62` (5.3:1) | Tests, emulator screenshot |
+| Gold text 2:1 on light backgrounds (verse references, onboarding, armour) | New `AppColors.goldText(context)`: deeper gold `#87641F` (5.1:1) in light mode, unchanged in dark mode | Tests, emulator screenshot |
+| Tap targets 44–46dp: Home Save/Reflect, mood chips, practice ticks | Raised to 48dp | Tests |
+| "How is your heart today?" heading could run off screen at large text | Heading wraps | Emulator at 200% text |
+| Deprecated radio properties in Profile | Moved to `RadioGroup` | `flutter analyze` |
+
+**Known exceptions:**
+
+- Week-day cells on Practices are 46dp wide on a 360dp phone: seven can't fit at 48dp.
+  They only show a summary that their label already reads out.
+- Rescue's "Continue" is low contrast while disabled during breathing; WCAG exempts
+  inactive controls.
+
+**Still to do:** a real TalkBack pass on the Samsung, and VoiceOver on iPhone.
+
+### 15 Nov 2026: untested features, before the day-7 update
+
+**Result:** 3 bugs found and fixed, everything else passed. `flutter test` now runs 47 tests
+(35 new in `test/feature_coverage_test.dart`) and they also pass with
+`TZ=America/New_York`. Emulator: Pixel (API 34), debug build.
+
+**Bugs found and fixed:**
+
+| Bug | How it was found | Fix |
+|---|---|---|
+| Left open overnight, the app kept showing yesterday's verse and mood check-in (and today's ticks, streaks and suggestions) until restarted | Emulator: checked in, moved the clock to the next day, resumed the app | New `todayProvider` refreshes at midnight and when the app resumes; date-based providers watch it. Rechecked on the emulator: resuming the next day shows the new verse and an empty check-in |
+| Daily streaks reset once a year in daylight-saving timezones (US, Canada, Europe, Australia): stepping back one day from the day after clocks go forward skipped a day | Script run with `TZ=America/New_York` | Calendar-day helpers in `lib/core/utils/dates.dart` replace `Duration(days: n)` arithmetic everywhere; covered by tests |
+| "Resist Distraction" label at the top of a Focus session could overflow at large text sizes | Widget test layout error | Label wraps instead |
+
+**Checked:**
+
+| Area | How | Result |
+|---|---|---|
+| Journal: all 6 entry types, including Temptation Trigger | Widget tests: create each type; edit keeps the type | Pass |
+| Memory: status change persists | Existing persistence test | Pass |
+| Practices: drag to reorder | Emulator: long-press drag, then restart | Pass, order kept and shown on Practices |
+| Practices: switch off | Emulator, then restart; plus tests | Pass, hidden from today and the week view, history kept |
+| Sacred Focus: all 5 modes, verse prompt on and off, ending early | Widget tests (10 cases) | Pass, early sessions saved as not completed |
+| Sacred Focus timer with screen off (60 s) and app in background (60 s) | Emulator | Pass, timer kept real time |
+| Rescue: all 10 categories through the full flow | Widget tests | Pass, each saves one session |
+| Rescue "I still need help": Begin again, Start a focus session | Widget tests | Pass |
+| Streaks and stats across a day change | Emulator clock change plus tests | Pass after the fixes above |
+| Data survives an app update | Emulator: data entered, then newer builds installed over it | Pass |
+
+**Still to check:** the Focus timer when the app is in the background on iOS, where apps are
+suspended; and TalkBack. On Android the switches in Manage Practices are not announced with
+the practice's name to UI automation, which suggests TalkBack may only say "Switch, on".
+
 ### 8 Nov 2026: Scripture replaced with the Berean Standard Bible
 
 **Result:** passed. All 100 quotations across 66 references match the official file, checked
@@ -187,47 +245,47 @@ Run after the reminder UI was hidden:
 **App behaviour, on either platform:**
 
 - [ ] VoiceOver and TalkBack
-- [ ] Streaks and stats across a day or week change, and time zone changes
-- [ ] Data surviving an app update
+- [x] Streaks and stats across a day or week change, and time zone changes (15 Nov 2026)
+- [x] Data surviving an app update (15 Nov 2026, Android)
 
 **Features not fully exercised:**
 
-- [ ] Journal: 4 of the 6 entry types (Gratitude and Answered Prayer were tested)
-- [ ] Journal: the Temptation Trigger type in particular
-- [ ] Memory: confirming a status change sticks
-- [ ] Practices: drag to reorder, and turning a practice off
-- [ ] Sacred Focus: other modes, ending early, and turning off the verse prompt
-- [ ] Rescue: categories other than Something else, Anxiety and Anger
-- [ ] Rescue: "Start a focus session" and "Begin the rescue flow again" from "I still need help"
+- [x] Journal: 4 of the 6 entry types (Gratitude and Answered Prayer were tested)
+- [x] Journal: the Temptation Trigger type in particular
+- [x] Memory: confirming a status change sticks
+- [x] Practices: drag to reorder, and turning a practice off
+- [x] Sacred Focus: other modes, ending early, and turning off the verse prompt
+- [x] Rescue: categories other than Something else, Anxiety and Anger
+- [x] Rescue: "Start a focus session" and "Begin the rescue flow again" from "I still need help"
 - [ ] Privacy Policy link with no connection: it opened Chrome, but the page wasn't reviewed
 
 **Android, when that release resumes:**
 
 - [ ] Release build with the current code. The last bundle is from 29 Aug 2026
-- [ ] Landscape. The app isn't locked to portrait on Android
+- [x] Landscape. Locked to portrait on 15 Nov 2026; checked on the emulator with rotation forced to landscape
 
 ## Open issues
 
 | Issue | Where | Severity | Status |
 |---|---|---|---|
-| Recovery's optional notes are saved but never shown anywhere, so users can't read what they wrote. Found in the code, not on the phone | `note` in `recovery_screen.dart` | High | Open |
-| "Memory" tab label cut off at 200% text | Scripture | Low | Open |
-| Copy shows two messages on Android: "Copied to clipboard" overlaps "Verse copied" | Scripture | Low | Open, Android only |
-| "Reflect" opens the Journal list instead of a new entry | Home verse card | Low | Open |
-| Mixed spelling: "armour" in headings, "armor" in verses | My Armour and elsewhere | Low | Open, verses must stay "armor" as in the Berean text, so only headings could change |
-| Deprecated radio properties | `profile_screen.dart:174` | Low | Open |
+| Recovery's optional notes are saved but never shown anywhere, so users can't read what they wrote. Found in the code, not on the phone | `note` in `recovery_screen.dart` | High | Fixed 15 Nov 2026: notes now also saved to the Journal as a Temptation Trigger entry. Checked on the Pixel 3a emulator (API 34, debug build): entry shows in the Journal and survives an app restart |
+| "Memory" tab label cut off at 200% text | Scripture | Low | Fixed 15 Nov 2026: tabs scroll above 1.3x text. Checked on the Pixel emulator (API 34) at 200% text, where all three labels show in full, and by a widget test |
+| Copy shows two messages on Android: "Copied to clipboard" overlaps "Verse copied" | Scripture | Low | Fixed 15 Nov 2026: the app's message is skipped on Android 13+, where the system confirms. Checked on the Pixel emulator (API 34). Rescue's "Message copied. You are not alone." is unchanged on purpose |
+| "Reflect" opens the Journal list instead of a new entry | Home verse card | Low | Fixed 15 Nov 2026: opens a new Reflection entry with the verse attached. Checked on the emulator and by a widget test |
+| Mixed spelling: "armour" in headings, "armor" in verses | My Armour and elsewhere | Low | Won't fix: "Armour" is part of the app name and verses must keep the Berean "armor" |
+| Deprecated radio properties | `profile_screen.dart:174` | Low | Fixed 16 Nov 2026: moved to `RadioGroup` |
 
 ## Feature gaps
 
 Features described in the PRD or shown in the app that aren't available in the MVP.
-[POST_MVP_BACKLOG.md](POST_MVP_BACKLOG.md) has the details for bringing each one back.
+[POST_MVP_BACKLOG.md](../product/POST_MVP_BACKLOG.md) has the details for bringing each one back.
 
 | Feature | State | Decision |
 |---|---|---|
-| Reminders (PRD 7.11) | UI built but hidden, and no notifications are sent | Post-MVP, see [IOS_SETUP.md](IOS_SETUP.md) step 4.6 |
+| Reminders (PRD 7.11) | UI built but hidden, and no notifications are sent | Post-MVP, see [IOS_SETUP.md](../ios/IOS_SETUP.md) step 4.6 |
 | Backup (PRD 7.12) | Not built | Post-MVP, removed from the App Store description |
 | Journal Privacy Lock | Toggle saved a setting but locked nothing, now removed | Removed for v1; needs `local_auth` if built later |
-| Crisis support note | Built but hidden | Post-MVP, see [IOS_SETUP.md](IOS_SETUP.md) step 4.9 |
+| Crisis support note | Built but hidden | Post-MVP, see [IOS_SETUP.md](../ios/IOS_SETUP.md) step 4.9 |
 | Verse sharing | Placeholder button removed | Out of scope for v1, as the PRD states |
 | Ambient sound (PRD 7.7) | Toggle played no audio, now removed | Post-MVP; needs an audio package and sounds |
 | iPad layout | Not supported on iOS | iPhone only for v1 |

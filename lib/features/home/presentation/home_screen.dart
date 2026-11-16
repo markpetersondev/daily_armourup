@@ -74,7 +74,7 @@ class HomeScreen extends ConsumerWidget {
                 const SizedBox(height: 28),
                 const SectionHeader(title: 'Quick actions'),
                 const _QuickActions(),
-                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                // Hidden for the MVP release; see docs/ios/IOS_SETUP.md step 4.6.
                 // const SizedBox(height: 28),
                 // _UpcomingReminder(prefs: profile.reminderPreferences),
               ],

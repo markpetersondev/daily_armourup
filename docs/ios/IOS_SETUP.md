@@ -3,6 +3,9 @@
 How to get Armour Up Daily building on this Mac and ready for App Store upload.
 When you finish this guide, continue with [APP_STORE_RELEASE.md](APP_STORE_RELEASE.md).
 
+Status updated 16 Nov 2026. For the full list of what's done and what's still required,
+see [IOS_REQUIREMENTS.md](IOS_REQUIREMENTS.md).
+
 Apple's requirements were checked on 4 Nov 2026. They change often, so see
 [Sources](#sources) if something looks different.
 
@@ -16,11 +19,11 @@ Apple's requirements were checked on 4 Nov 2026. They change often, so see
 | CocoaPods | 1.14.3 | 1.16.2 |
 | Signing certificates on this Mac | 0 | Created by Xcode after you sign in |
 | Apple team in the project | `SGA7JNW87Z` | Confirm it is your paid team |
-| Deployment target | iOS 12.0 | iOS 15.0 |
-| Devices | iPhone and iPad | iPhone only for v1 |
-| Orientation on iPhone | Portrait and landscape | Portrait only |
-| Reminders | Settings only, nothing fires | Hidden for the MVP (step 4.6) |
-| Journal Privacy Lock | Toggle saves a value but locks nothing | Removed for v1 |
+| Deployment target | iOS 15.0 ✅ (project, Podfile, AppFrameworkInfo) | iOS 15.0 |
+| Devices | iPhone only ✅ | iPhone only for v1 |
+| Orientation on iPhone | Portrait only ✅ (also locked in Dart) | Portrait only |
+| Reminders | Hidden ✅ | Hidden for the MVP (step 4.6) |
+| Journal Privacy Lock | Removed ✅ | Removed for v1 |
 | Scripture text | Berean Standard Bible, credited in the app | Done (step 4.8) |
 
 **The macOS and Xcode upgrade comes first.** Apple rejects uploads not built with
@@ -127,13 +130,13 @@ Commit the result.
 
 - In Xcode, go to Runner project > Info > **iOS Deployment Target** and choose 15.0.
   Check the Runner target's **Minimum Deployments** shows 15.0 too.
-- In [ios/Podfile](../ios/Podfile), replace the commented `platform` line with:
+- In [ios/Podfile](../../ios/Podfile), replace the commented `platform` line with:
 
   ```ruby
   platform :ios, '15.0'
   ```
 
-- If [ios/Flutter/AppFrameworkInfo.plist](../ios/Flutter/AppFrameworkInfo.plist) still
+- If [ios/Flutter/AppFrameworkInfo.plist](../../ios/Flutter/AppFrameworkInfo.plist) still
   has a `MinimumOSVersion` key, set it to `15.0`.
 
 Then run `cd ios && pod install && cd ..`.
@@ -145,7 +148,7 @@ still run on iPads in compatibility mode, and App Review may test them that way.
 
 - In Xcode, go to the Runner target > General > **Supported Destinations** and remove
   iPad. `TARGETED_DEVICE_FAMILY` should become `"1"`.
-- In [ios/Runner/Info.plist](../ios/Runner/Info.plist), keep only portrait:
+- In [ios/Runner/Info.plist](../../ios/Runner/Info.plist), keep only portrait:
 
   ```xml
   <key>UISupportedInterfaceOrientations</key>
@@ -196,7 +199,7 @@ flutter pub add flutter_local_notifications timezone flutter_timezone
 ```
 
 **Register the delegate** in
-[ios/Runner/AppDelegate.swift](../ios/Runner/AppDelegate.swift), inside
+[ios/Runner/AppDelegate.swift](../../ios/Runner/AppDelegate.swift), inside
 `didFinishLaunchingWithOptions`, before the `return`:
 
 ```swift
@@ -223,11 +226,11 @@ version you install.
 
 | Where | Change |
 |---|---|
-| [lib/main.dart](../lib/main.dart) | Initialise the service before `runApp`, and reschedule so time zone changes are picked up |
-| [onboarding_steps.dart:392](../lib/features/onboarding/presentation/onboarding_steps.dart#L392) | Remove the "later update" footnote, and ask permission when the user continues from this step |
-| [onboarding_provider.dart:72](../lib/features/onboarding/providers/onboarding_provider.dart#L72) | Schedule reminders after `complete()` saves the profile |
-| [edit_profile_screen.dart:46](../lib/features/profile/presentation/edit_profile_screen.dart#L46) | Reschedule after saving |
-| [profile_screen.dart:357](../lib/features/profile/presentation/profile_screen.dart#L357) | Cancel all notifications when the user resets app data |
+| [lib/main.dart](../../lib/main.dart) | Initialise the service before `runApp`, and reschedule so time zone changes are picked up |
+| [onboarding_steps.dart:392](../../lib/features/onboarding/presentation/onboarding_steps.dart#L392) | Remove the "later update" footnote, and ask permission when the user continues from this step |
+| [onboarding_provider.dart:72](../../lib/features/onboarding/providers/onboarding_provider.dart#L72) | Schedule reminders after `complete()` saves the profile |
+| [edit_profile_screen.dart:46](../../lib/features/profile/presentation/edit_profile_screen.dart#L46) | Reschedule after saving |
+| [profile_screen.dart:357](../../lib/features/profile/presentation/profile_screen.dart#L357) | Cancel all notifications when the user resets app data |
 
 **Use the PRD's tone:** gentle invitations such as "Begin the day anchored in prayer",
 never messages about missed streaks. Keep notification text generic so it doesn't
@@ -243,7 +246,7 @@ should explain how to turn notifications on in iOS Settings.
 
 ### 4.7 Remove the Journal Privacy Lock toggle
 
-The toggle at [profile_screen.dart:204](../lib/features/profile/presentation/profile_screen.dart#L204)
+The toggle at [profile_screen.dart:204](../../lib/features/profile/presentation/profile_screen.dart#L204)
 saves a setting, but the journal never reads it. A user could turn it on and believe
 their journal is protected when it isn't.
 
@@ -266,7 +269,7 @@ text, which was copied from ChatGPT and looked like the NIV.
   changed to single quotes. Psalm headings are left out.
 - **Credit:** shown under Profile > About.
 
-A copy is kept at [scripture/bsb.txt](scripture/bsb.txt). It isn't bundled with the app. Any
+A copy is kept at [scripture/bsb.txt](../product/scripture/bsb.txt). It isn't bundled with the app. Any
 new verse should be copied from that file, not from an AI tool or from memory.
 
 ### 4.9 Add crisis support wording (deferred until after the MVP)
@@ -289,9 +292,9 @@ audience, and it also helps show the app doesn't claim to replace professional c
 ### 4.10 Tidy up
 
 - Replace the deprecated radio properties at
-  [profile_screen.dart:174](../lib/features/profile/presentation/profile_screen.dart#L174)
+  [profile_screen.dart:174](../../lib/features/profile/presentation/profile_screen.dart#L174)
   with `RadioGroup`. This is optional for now.
-- Mark backup as post-v1 in [PRD.md](PRD.md).
+- Mark backup as post-v1 in [PRD.md](../product/PRD.md).
 
 ## 5. Test the app
 

@@ -210,7 +210,7 @@ class _RecoveryScreenState extends ConsumerState<RecoveryScreen> {
                           ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                     ),
                   ),
-                  // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.9.
+                  // Hidden for the MVP release; see docs/ios/IOS_SETUP.md step 4.9.
                   // const SizedBox(height: 28),
                   // const CrisisSupportNote(),
                 ],

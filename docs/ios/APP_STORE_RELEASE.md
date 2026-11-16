@@ -204,7 +204,7 @@ don't show any real personal journal text.
 
 ## 9. Upload the build
 
-1. Set the version in [pubspec.yaml](../pubspec.yaml). `1.0.0+1` works for the first
+1. Set the version in [pubspec.yaml](../../pubspec.yaml). `1.0.0+1` works for the first
    upload, and each later upload needs a higher build number, such as `1.0.0+2`.
 2. Build it:
 

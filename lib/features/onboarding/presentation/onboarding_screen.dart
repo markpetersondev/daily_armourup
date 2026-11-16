@@ -9,7 +9,7 @@ import 'onboarding_steps.dart';
 
 /// Five-step onboarding: welcome, name, focus areas, goals, ready.
 /// The reminders step is hidden for the MVP release (no notifications yet);
-/// see docs/IOS_SETUP.md step 4.6.
+/// see docs/ios/IOS_SETUP.md step 4.6.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -137,7 +137,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       NameStep(onNext: _next),
                       FocusAreasStep(onNext: _next),
                       GoalsStep(onNext: _next),
-                      // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.6.
+                      // Hidden for the MVP release; see docs/ios/IOS_SETUP.md step 4.6.
                       // RemindersStep(onNext: _next),
                       ReadyStep(onFinish: _finish),
                     ],

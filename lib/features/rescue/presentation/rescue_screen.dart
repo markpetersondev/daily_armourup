@@ -99,7 +99,7 @@ class RescueScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Hidden for the MVP release; see docs/IOS_SETUP.md step 4.9.
+                // Hidden for the MVP release; see docs/ios/IOS_SETUP.md step 4.9.
                 // const SizedBox(height: 24),
                 // const CrisisSupportNote(),
               ],
