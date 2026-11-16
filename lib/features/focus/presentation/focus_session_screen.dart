@@ -154,8 +154,11 @@ class _FocusSessionScreenState extends ConsumerState<FocusSessionScreen>
             children: [
               Icon(content.icon, size: 20, color: AppColors.warmGold),
               const SizedBox(width: 10),
-              Text(widget.config.mode.label,
-                  style: theme.textTheme.titleMedium),
+              // Flexible so long labels wrap at large text sizes.
+              Flexible(
+                child: Text(widget.config.mode.label,
+                    style: theme.textTheme.titleMedium),
+              ),
             ],
           ),
           const Spacer(),
