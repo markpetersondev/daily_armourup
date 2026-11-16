@@ -81,14 +81,18 @@ class _ManageTile extends ConsumerWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Switch(
-              value: habit.isEnabled,
-              onChanged: (v) => ref
-                  .read(spiritualHabitsProvider.notifier)
-                  .setEnabled(habit.id, v),
+            // Without a label, TalkBack only says "Switch, on".
+            Semantics(
+              label: 'Show ${habit.title} in today\'s practices',
+              child: Switch(
+                value: habit.isEnabled,
+                onChanged: (v) => ref
+                    .read(spiritualHabitsProvider.notifier)
+                    .setEnabled(habit.id, v),
+              ),
             ),
             PopupMenuButton<String>(
-              tooltip: 'Practice options',
+              tooltip: 'Options for ${habit.title}',
               onSelected: (value) async {
                 switch (value) {
                   case 'edit':
