@@ -49,7 +49,7 @@ iOS, which is correct because iOS shows no system message.
 | 3 | **Upgrade Flutter** from 3.38.4 to 3.41+, and CocoaPods to 1.16.2 | Needed to build with the new Xcode, and for #4 | You |
 | 4 | **UIScene migration** | Apps built with the iOS 27 SDK crash on launch without it. Flutter 3.41+ migrates automatically (IOS_SETUP step 4.1) | Code |
 | 5 | **Apple Developer Program** ($99/year) | Can't upload or use TestFlight without it. Not yet confirmed | You |
-| 6 | **Support page URL** | A required field in App Store Connect. See [section 4](#4-support-page-and-faq) | ⚠️ `support.html` written in the `armour-up-privacy` repo; **push it** to go live at https://markpetersondev.github.io/armour-up-privacy/support.html |
+| 6 | **Support page URL** | A required field in App Store Connect. See [section 4](#4-support-page-and-faq) | ✅ Live 16 Nov 2026 at https://markpetersondev.github.io/armour-up-privacy/support.html |
 | 7 | **iPhone screenshots** (6.9" display, e.g. 1320×2868) | Required for the listing | After the upgrade |
 | 8 | **App Store Connect forms**: agreements, trader status (EU), age rating, App Privacy, export compliance | Required before submitting. See [APP_STORE_RELEASE.md](APP_STORE_RELEASE.md) | You |
 | 9 | **Release build and upload** with `flutter build ipa` | The only way to submit | After #1–5 |
