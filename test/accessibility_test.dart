@@ -67,6 +67,7 @@ void main() {
     AppRoutes.progress,
     AppRoutes.profileEdit,
     AppRoutes.armour,
+    AppRoutes.help,
   ];
 
   for (final route in routes) {
