@@ -166,29 +166,29 @@ class ProfileScreen extends ConsumerWidget {
                 PremiumCard(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                  child: Column(
-                    children: [
-                      for (final mode in ThemeMode.values)
-                        RadioListTile<ThemeMode>(
-                          value: mode,
-                          groupValue: profile.selectedThemeMode,
-                          onChanged: (m) {
-                            if (m != null) {
-                              ref
-                                  .read(userProfileProvider.notifier)
-                                  .setThemeMode(m);
-                            }
-                          },
-                          title: Text(switch (mode) {
-                            ThemeMode.system => 'Match device',
-                            ThemeMode.light => 'Light — warm cream',
-                            ThemeMode.dark => 'Dark — deep charcoal',
-                          }),
-                          activeColor: theme.colorScheme.primary,
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 12),
-                        ),
-                    ],
+                  child: RadioGroup<ThemeMode>(
+                    groupValue: profile.selectedThemeMode,
+                    onChanged: (m) {
+                      if (m != null) {
+                        ref.read(userProfileProvider.notifier).setThemeMode(m);
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        for (final mode in ThemeMode.values)
+                          RadioListTile<ThemeMode>(
+                            value: mode,
+                            title: Text(switch (mode) {
+                              ThemeMode.system => 'Match device',
+                              ThemeMode.light => 'Light — warm cream',
+                              ThemeMode.dark => 'Dark — deep charcoal',
+                            }),
+                            activeColor: theme.colorScheme.primary,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 28),
